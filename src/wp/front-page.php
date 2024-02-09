@@ -101,169 +101,73 @@
       <!-- Campaign Swiper -->
       <div class="campaign__swiper js-campaign-swiper">
         <div class="swiper">
+
+          <?php
+          $args = array(
+            "post_type" => "campaign", //post通常投稿
+            "posts_per_page" => -1, //表示件数（-1で全件）
+            "orderby" => "date", // data投稿日時、titeタイトル、modified最終更新日時、comment_countコメント数
+            "order" => "DESC", //ACS昇順、DESC降順
+          );
+          $the_query = new WP_Query($args);
+          ?>
           <ul class="swiper-wrapper">
-            <li class="swiper-slide">
-              <div class="campaign__card card-campaign">
-                <a href="./campaign.html" class="card-campaign__link">
-                  <figure class="card-campaign__image">
-                    <img src="./assets/images/campaign-card/campaign-card01.webp" alt="紺青の海中を黄色く小さな熱帯魚の群れが泳いでいる様子" />
-                  </figure>
-                  <div class="card-campaign__meta">
-                    <span class="card-campaign__category category-diving">ライセンス講習</span>
-                    <h3 class="card-campaign__title">ライセンス取得</h3>
-                  </div>
-                  <div class="card-campaign__content">
-                    <p class="card-campaign__text">全部コミコミ&#040;お一人様&#041;</p>
-                    <div class="card-campaign__prices">
-                      <span class="card-campaign__price-before">&#165;56,000</span>
-                      <span class="card-campaign__price-after">&#165;46,000</span>
+            <?php if ($the_query->have_posts()) : ?>
+              <?php for ($i = 0; $i < 2; $i++) { ?>
+                <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+                  <?php
+                  // 公開/非公開の判定
+                  $public = get_field('acf_campaign_public');
+                  if ($public === false) {
+                    break;
+                  }
+                  ?>
+                  <li class="swiper-slide">
+                    <div class="campaign__card card-campaign">
+                      <?php
+                      $post_id = get_the_ID(); // 投稿の ID を指定
+                      $thumbnail_id = get_post_thumbnail_id($post_id); // アイキャッチ画像の ID を取得
+                      $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
+                      ?>
+                      <a href="./campaign.html" class="card-campaign__link">
+                        <figure class="card-campaign__image">
+                          <?php if (has_post_thumbnail()) : ?>
+                            <img src="<?php the_post_thumbnail_url("full"); ?>" alt="<?php echo esc_attr($alt); ?>">
+                          <?php else : ?>
+                            <img src="<?php echo esc_url(get_theme_file_uri("/assets/images/common/noimage.jpg")); ?>" alt="ノーイメージ画像" />
+                          <?php endif; ?>
+                        </figure>
+                        <div class="card-campaign__meta">
+                          <?php
+                          $taxonomy = 'diving_category';
+                          $terms = get_the_terms($post_id, $taxonomy);
+                          if (!is_wp_error($terms) && !empty($terms)) {
+                            echo '<span class="card-campaign__category category-diving">' . esc_html($terms[0]->name) . '</span>';
+                          }
+                          ?>
+                          <h3 class="card-campaign__title"><?php the_title(); ?></h3>
+                        </div>
+                        <div class="card-campaign__content">
+                          <p class="card-campaign__text">全部コミコミ&#040;お一人様&#041;</p>
+
+                          <div class="card-campaign__prices">
+                            <?php
+                            $price_before = number_format(get_field('acf_parice_before'));
+                            $price_after = number_format(get_field('acf_parice_after'));
+                            ?>
+                            <span class="card-campaign__price-before">&#165;<?php echo $price_before; ?></span>
+                            <span class="card-campaign__price-after">&#165;<?php echo $price_after; ?></span>
+                          </div>
+                        </div>
+                      </a>
                     </div>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li class="swiper-slide">
-              <div class="campaign__card card-campaign">
-                <a href="./campaign.html" class="card-campaign__link">
-                  <figure class="card-campaign__image">
-                    <img src="./assets/images/campaign-card/campaign-card02.webp" alt="透き通った海の砂浜近くに小型ボートが停泊している様子" />
-                  </figure>
-                  <div class="card-campaign__meta">
-                    <span class="card-campaign__category category-diving">体験ダイビング</span>
-                    <h3 class="card-campaign__title">貸切体験ダイビング</h3>
-                  </div>
-                  <div class="card-campaign__content">
-                    <p class="card-campaign__text">全部コミコミ&#040;お一人様&#041;</p>
-                    <div class="card-campaign__prices">
-                      <span class="card-campaign__price-before">&#165;24,000</span>
-                      <span class="card-campaign__price-after">&#165;18,000</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li class="swiper-slide">
-              <div class="campaign__card card-campaign">
-                <a href="./campaign.html" class="card-campaign__link">
-                  <figure class="card-campaign__image">
-                    <img src="./assets/images/campaign-card/campaign-card03.webp" alt="夜の海中に漂う幻想的なクラゲの様子" />
-                  </figure>
-                  <div class="card-campaign__meta">
-                    <span class="card-campaign__category category-diving">体験ダイビング</span>
-                    <h3 class="card-campaign__title">ナイトダイビング</h3>
-                  </div>
-                  <div class="card-campaign__content">
-                    <p class="card-campaign__text">全部コミコミ&#040;お一人様&#041;</p>
-                    <div class="card-campaign__prices">
-                      <span class="card-campaign__price-before">&#165;10,000</span>
-                      <span class="card-campaign__price-after">&#165;8,000</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li class="swiper-slide">
-              <div class="campaign__card card-campaign">
-                <a href="./campaign.html" class="card-campaign__link">
-                  <figure class="card-campaign__image">
-                    <img src="./assets/images/campaign-card/campaign-card04.webp" alt="ダイビングスーツを着た4人のダイバーが海上にいる様子" />
-                  </figure>
-                  <div class="card-campaign__meta">
-                    <span class="card-campaign__category category-diving">ファンダイビング</span>
-                    <h3 class="card-campaign__title">貸切ファンダイビング</h3>
-                  </div>
-                  <div class="card-campaign__content">
-                    <p class="card-campaign__text">全部コミコミ&#040;お一人様&#041;</p>
-                    <div class="card-campaign__prices">
-                      <span class="card-campaign__price-before">&#165;20,000</span>
-                      <span class="card-campaign__price-after">&#165;16,000</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <!-- ! for swiper loop start-->
-            <li class="swiper-slide">
-              <div class="campaign__card card-campaign">
-                <a href="./campaign.html" class="card-campaign__link">
-                  <figure class="card-campaign__image">
-                    <img src="./assets/images/campaign-card/campaign-card01.webp" alt="紺青の海中を黄色く小さな熱帯魚の群れが泳いでいる様子" />
-                  </figure>
-                  <div class="card-campaign__meta">
-                    <span class="card-campaign__category category-diving">ライセンス講習</span>
-                    <h3 class="card-campaign__title">ライセンス取得</h3>
-                  </div>
-                  <div class="card-campaign__content">
-                    <p class="card-campaign__text">全部コミコミ&#040;お一人様&#041;</p>
-                    <div class="card-campaign__prices">
-                      <span class="card-campaign__price-before">&#165;56,000</span>
-                      <span class="card-campaign__price-after">&#165;46,000</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li class="swiper-slide">
-              <div class="campaign__card card-campaign">
-                <a href="./campaign.html" class="card-campaign__link">
-                  <figure class="card-campaign__image">
-                    <img src="./assets/images/campaign-card/campaign-card02.webp" alt="透き通った海の砂浜近くに小型ボートが停泊している様子" />
-                  </figure>
-                  <div class="card-campaign__meta">
-                    <span class="card-campaign__category category-diving">体験ダイビング</span>
-                    <h3 class="card-campaign__title">貸切体験ダイビング</h3>
-                  </div>
-                  <div class="card-campaign__content">
-                    <p class="card-campaign__text">全部コミコミ&#040;お一人様&#041;</p>
-                    <div class="card-campaign__prices">
-                      <span class="card-campaign__price-before">&#165;24,000</span>
-                      <span class="card-campaign__price-after">&#165;18,000</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li class="swiper-slide">
-              <div class="campaign__card card-campaign">
-                <a href="./campaign.html" class="card-campaign__link">
-                  <figure class="card-campaign__image">
-                    <img src="./assets/images/campaign-card/campaign-card03.webp" alt="夜の海中に漂う幻想的なクラゲの様子" />
-                  </figure>
-                  <div class="card-campaign__meta">
-                    <span class="card-campaign__category category-diving">体験ダイビング</span>
-                    <h3 class="card-campaign__title">ナイトダイビング</h3>
-                  </div>
-                  <div class="card-campaign__content">
-                    <p class="card-campaign__text">全部コミコミ&#040;お一人様&#041;</p>
-                    <div class="card-campaign__prices">
-                      <span class="card-campaign__price-before">&#165;10,000</span>
-                      <span class="card-campaign__price-after">&#165;8,000</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <li class="swiper-slide">
-              <div class="campaign__card card-campaign">
-                <a href="./campaign.html" class="card-campaign__link">
-                  <figure class="card-campaign__image">
-                    <img src="./assets/images/campaign-card/campaign-card04.webp" alt="ダイビングスーツを着た4人のダイバーが海上にいる様子" />
-                  </figure>
-                  <div class="card-campaign__meta">
-                    <span class="card-campaign__category category-diving">ファンダイビング</span>
-                    <h3 class="card-campaign__title">貸切ファンダイビング</h3>
-                  </div>
-                  <div class="card-campaign__content">
-                    <p class="card-campaign__text">全部コミコミ&#040;お一人様&#041;</p>
-                    <div class="card-campaign__prices">
-                      <span class="card-campaign__price-before">&#165;20,000</span>
-                      <span class="card-campaign__price-after">&#165;16,000</span>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </li>
-            <!-- ! for swiper loop end-->
+                  </li>
+                <?php endwhile; ?>
+              <?php } ?>
+              <?php wp_reset_postdata(); ?>
+            <?php else : ?>
+              <li>記事が投稿されていません</li>
+            <?php endif; ?>
           </ul>
         </div>
         <div class="swiper-button-prev campaign__swiper-prev">
