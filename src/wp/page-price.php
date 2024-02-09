@@ -1,5 +1,5 @@
 <?php get_header(); ?>
 <main>
-  index
+  price
 </main>
 <?php get_footer(); ?>

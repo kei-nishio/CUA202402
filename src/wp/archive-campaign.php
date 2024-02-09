@@ -1,5 +1,5 @@
 <?php get_header(); ?>
 <main>
-  index
+  archive-campaign
 </main>
 <?php get_footer(); ?>

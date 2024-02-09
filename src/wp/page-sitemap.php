@@ -1,5 +1,5 @@
 <?php get_header(); ?>
 <main>
-  index
+  site map
 </main>
 <?php get_footer(); ?>

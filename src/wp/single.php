@@ -1,5 +1,5 @@
 <?php get_header(); ?>
 <main>
-  index
+  single(blog)
 </main>
 <?php get_footer(); ?>

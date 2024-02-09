@@ -1,5 +1,5 @@
 <?php get_header(); ?>
 <main>
-  index
+  <?php the_content(); ?>
 </main>
 <?php get_footer(); ?>
