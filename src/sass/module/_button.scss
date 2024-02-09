@@ -1,0 +1,108 @@
+@use "global" as *;
+
+.button {
+  display: inline flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: rem(8);
+  position: relative;
+  z-index: 2;
+  min-width: rem(202);
+  margin-right: rem(5);
+  margin-bottom: rem(5);
+  padding: rem(15) rem(39);
+  border: rem(1) solid $cGreenAccent;
+  background-color: $cGreenAccent;
+  color: $white;
+  font-size: rem(14);
+  line-height: calc(22 / 14);
+  transition: color 0.3s;
+}
+.button p {
+  z-index: 2;
+}
+.button p:first-letter {
+  text-transform: capitalize;
+}
+
+// * outer border
+.button::before {
+  content: "";
+  position: absolute;
+  right: rem(-4);
+  bottom: rem(-4);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  // 親要素と高さ幅を完全一致させるためoutlineを採用
+  // border: rem(1) solid $cGreenAccent;
+  outline: rem(1) solid $cGreenAccent;
+}
+
+// * background on hover
+.button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transform: scale(0, 1);
+  transform-origin: left top;
+  width: 100%;
+  height: 100%;
+  background-color: $white;
+  transition: cubic-bezier(0.45, 0, 0.55, 1) 0.2s;
+}
+.button__arrow {
+  flex-shrink: 0;
+  z-index: 2;
+  margin-top: rem(2);
+  transition: background-color 0.3s;
+}
+
+// * hover
+.button:hover {
+  @include mq {
+    color: $cGreenAccent;
+  }
+}
+.button:hover .button__arrow {
+  @include mq {
+    background-color: $cGreenAccent;
+  }
+}
+.button:hover::after {
+  @include mq {
+    transform: scale(1, 1);
+  }
+}
+
+// Modifier
+.button.button--white {
+  border: rem(1) solid $white;
+  background-color: $white;
+  color: $cGreenAccent;
+
+  &:before {
+    outline: rem(1) solid $white;
+  }
+
+  &::after {
+    background-color: $cGreenAccent;
+  }
+  & .button__arrow {
+    background-color: $cGreenAccent;
+  }
+
+  // hover
+  &:hover {
+    @include mq {
+      color: $white;
+    }
+  }
+  &:hover .button__arrow {
+    @include mq {
+      background-color: $white;
+    }
+  }
+}

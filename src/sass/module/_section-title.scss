@@ -1,0 +1,50 @@
+@use "global" as *;
+
+.section-title {
+  text-align: center;
+}
+.section-title__en {
+  color: $cGreen01;
+  font-size: rem(32);
+  line-height: 1.25;
+  @include mq {
+    font-size: rem(40);
+    line-height: 1;
+  }
+}
+.section-title__en::first-letter {
+  color: $cGreenAccent;
+  text-transform: uppercase;
+}
+.section-title__ja {
+  display: inline-block;
+  margin-top: rem(6);
+  color: $cGreenAccent;
+  font-weight: $normal;
+  font-size: rem(12);
+  @include mq {
+    margin-top: rem(10);
+  }
+}
+
+// modifier white
+.section-title.section-title--white-pc .section-title__en,
+.section-title.section-title--white-pc .section-title__ja {
+  @include mq {
+    color: $white;
+  }
+}
+.section-title.section-title--white-pc .section-title__en::first-letter {
+  @include mq {
+    color: $cGreen02;
+  }
+}
+
+// modifier large
+.section-title.section-title--large .section-title__en {
+  font-size: rem(80);
+  line-height: 0.8;
+}
+.section-title.section-title--large .section-title__ja {
+  margin-top: 0;
+}

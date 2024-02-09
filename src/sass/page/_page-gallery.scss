@@ -1,0 +1,8 @@
+@use "global" as *;
+
+.page-gallery {
+  margin-top: rem(34);
+  @include mq {
+    margin-top: rem(120);
+  }
+}

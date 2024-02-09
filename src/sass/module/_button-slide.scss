@@ -1,0 +1,22 @@
+@use "global" as *;
+
+.button-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: rem(2) solid $cGreenAccent;
+  border-radius: 50%;
+}
+.button-slide__arrow-right,
+.button-slide__arrow-left {
+  margin-top: rem(4);
+}
+.button-slide__arrow-left {
+  transform: rotate(180deg);
+}
+.button-slide__arrow-up {
+  transform: rotate(-90deg);
+  margin-left: rem(3);
+}

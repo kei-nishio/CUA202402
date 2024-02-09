@@ -1,0 +1,29 @@
+@use "global" as *;
+
+@if $startFrom == sp {
+  .inner {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: $padding-sp;
+    padding-right: $padding-sp;
+    @include mq("md") {
+      max-width: $inner + strip-unit($padding-pc) * 2;
+      padding-left: $padding-pc;
+      padding-right: $padding-pc;
+    }
+  }
+} @else {
+  .inner {
+    width: 100%;
+    max-width: $inner + strip-unit($padding-pc) * 2;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: $padding-pc;
+    padding-right: $padding-pc;
+    @include mq("md") {
+      padding-left: $padding-sp;
+      padding-right: $padding-sp;
+    }
+  }
+}

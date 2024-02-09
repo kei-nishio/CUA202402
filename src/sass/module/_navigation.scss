@@ -1,0 +1,69 @@
+@use "global" as *;
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: rem(16) 0;
+  width: 100%;
+  max-height: rem(667);
+  @include mq {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0 rem(120);
+    max-height: none;
+  }
+}
+.navigation__items {
+  width: 50%;
+  @include mq {
+    width: initial;
+  }
+}
+.navigation__item {
+  //list-style-positionだと位置調整不可のためBGで設定。
+  //   list-style-position: outside;
+  //   list-style-image: url("..common/list-style.svg"); // ヒトデ
+  //   margin-left: rem(22);
+  padding-left: rem(22);
+  background-image: url("../images/common/list-style.svg");
+  background-position: top rem(9) left;
+  background-repeat: no-repeat;
+}
+.navigation__item:not(:first-of-type) {
+  margin-top: rem(16);
+}
+.navigation__item::marker {
+  line-height: 0;
+}
+.navigation__item > a,
+.navigation__sub-item > a {
+  display: block;
+  padding-bottom: rem(12);
+  padding-top: rem(12);
+  color: $white;
+  line-height: 1.125;
+  transition: opacity 0.3s;
+
+  &:hover {
+    @include mq {
+      opacity: 0.8;
+    }
+  }
+}
+.navigation__item > a {
+  font-weight: $bold;
+}
+.navigation__sub-item > a {
+  font-weight: $normal;
+}
+
+// Modifier
+.navigation.navigation--black {
+  & .navigation__item > a,
+  & .navigation__sub-item > a {
+    color: $cGreen01;
+    text-shadow: 2px 2px 0 $white, -2px -2px 0 $white, -2px 2px 0 $white, 2px -2px 0 $white, 2px 0 0 $white,
+      -2px 0 0 $white, 0 2px 0 $white, 0 -2px 0 $white;
+  }
+}

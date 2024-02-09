@@ -1,0 +1,109 @@
+@use "global" as *;
+
+// * 共通部分
+.sidebar__article:not(:first-child) {
+  margin-top: rem(80);
+}
+
+.sidebar__title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: rem(20);
+  border-left: rem(8) $cGreenAccent solid;
+}
+
+.sidebar__title-icon {
+  width: rem(40);
+  height: rem(40);
+  & img {
+    filter: brightness(0);
+  }
+}
+
+.sidebar__title-text {
+  padding-bottom: rem(2);
+  padding-left: rem(13);
+  padding-top: rem(12);
+  color: $cGreen01;
+  font-weight: $normal;
+  font-size: rem(24);
+}
+
+// * 人気記事
+.sidebar__popular-article-cards {
+  margin-top: rem(24);
+}
+
+.sidebar__popular-article-card:not(:first-child) {
+  margin-top: rem(24);
+}
+
+// * 口コミ
+.sidebar__review-cards {
+  margin-top: rem(24);
+}
+
+.sidebar__button-review {
+  margin-top: rem(40);
+  text-align: center;
+}
+
+// * キャンペーン
+.sidebar__campaign-cards {
+  margin-top: rem(24);
+}
+.sidebar__campaign-card:not(:first-child) {
+  margin-top: rem(40);
+}
+.sidebar__button-campaign {
+  margin-top: rem(40);
+  text-align: center;
+}
+
+// * アーカイブ
+.sidebar__archive-lists {
+  margin-top: rem(24);
+  color: $cGreenAccent;
+  font-size: rem(24);
+  font-family: $second-font-family;
+}
+
+.sidebar__archive-list {
+  margin-top: rem(3);
+}
+.sidebar__archive-year {
+  cursor: pointer;
+}
+
+.sidebar__archive-year,
+.sidebar__archive-month {
+  padding-left: rem(32);
+  position: relative;
+}
+
+.sidebar__archive-months {
+  padding-left: rem(24);
+  display: none;
+}
+.sidebar__archive-month {
+  margin-top: rem(3);
+}
+.sidebar__archive-year::before,
+.sidebar__archive-month::before{
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 24%;
+  width: rem(24);
+  height: rem(24);
+  background-image: url("../images/common/list-polygon.png");
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: transform 0.3s;
+}
+.sidebar__archive-year.is-active::before {
+  transform: rotate(90deg);
+}

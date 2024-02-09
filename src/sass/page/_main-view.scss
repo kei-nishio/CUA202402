@@ -1,0 +1,63 @@
+@use "global" as *;
+
+.main-view {
+  width: 100%;
+  height: 100dvh;
+}
+.main-view__inner {
+  width: 100%;
+  height: inherit;
+}
+.main-view__body {
+  position: relative;
+  width: 100%;
+  height: inherit;
+}
+.main-view__heading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: zi(just-above);
+  transform: translate(-50%, -50%);
+  @include mq {
+    top: 55.6%;
+  }
+}
+.main-view__text-large {
+  // margin-right: -0.525em;
+  text-indent: 0.525em;
+  color: $white;
+  font-weight: $normal;
+  font-size: rem(40);
+  line-height: 1.2;
+  font-family: $third-font-family;
+  letter-spacing: 0.525em;
+  text-align: center;
+  text-transform: uppercase;
+  @include mq {
+    font-size: rem(80);
+  }
+}
+.main-view__text-small {
+  color: $white;
+  font-size: rem(20);
+  line-height: 1.7;
+  text-align: center;
+  @include mq {
+    margin-top: rem(1);
+  }
+}
+
+.main-view__swiper,
+.main-view__swiper .swiper {
+  height: inherit;
+}
+
+.main-view__image,
+.main-view__image img {
+  width: 100%;
+  height: inherit;
+}
+.main-view__image img {
+  object-fit: cover;
+}

@@ -1,0 +1,44 @@
+@use "global" as *;
+
+// * user variables
+$hamburger-width: rem(32);
+$hamburger-height: rem(24);
+$hamburger-border-number: 3;
+$hamburger-border-height: rem(1);
+$hamburger-rotate: 45deg;
+$hamburger-scale: 1.414;
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: $hamburger-width;
+  height: $hamburger-height;
+  cursor: pointer;
+}
+.hamburger__border {
+  display: inline-block;
+  width: 100%;
+  height: $hamburger-border-height;
+  border-radius: $hamburger-border-height;
+  background-color: $white;
+  transition: transform 0.3s, opacity 0.1s;
+}
+
+
+// * is-active
+.is-active .hamburger__border {
+  @for $i from 1 through $hamburger-border-number {
+    &:nth-child(#{$i}) {
+      @if $i == 1 {
+        transform: scaleX($hamburger-scale) translateY(calc($hamburger-height / 2)) rotate($hamburger-rotate);
+      } @else if $i == $hamburger-border-number {
+        transform: scaleX($hamburger-scale)
+          translateY(calc(-1 * $hamburger-height / 2))
+          rotate(calc(-1 * $hamburger-rotate));
+      } @else {
+        opacity: 0;
+      }
+    }
+  }
+}

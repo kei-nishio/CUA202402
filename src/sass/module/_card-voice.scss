@@ -1,0 +1,112 @@
+@use "global" as *;
+
+.card-voice {
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-shadow: rem(2) rem(2) rem(10) 0 rgba($black, 0.25);
+  background: $white;
+}
+.card-voice__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding-bottom: rem(21);
+  padding-left: rem(16);
+  padding-right: rem(16);
+  padding-top: rem(18);
+  transition: opacity 0.3s;
+  @include mq {
+    padding-left: rem(24);
+    padding-right: rem(24);
+    padding-top: rem(24);
+  }
+
+  &:hover {
+    @include mq {
+      opacity: 0.8;
+    }
+  }
+}
+.card-voice__flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: rem(13);
+  @include mq {
+    gap: rem(16);
+  }
+}
+.card-voice__meta {
+  @include mq {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+  }
+}
+.card-voice__information {
+  flex-shrink: 0;
+  color: $cGreen01;
+  font-size: rem(12);
+  line-height: 1;
+  font-family: $second-font-family;
+  @include mq {
+    line-height: 1.5;
+  }
+}
+.card-voice__category {
+  margin-top: rem(3);
+}
+.card-voice__title {
+  margin-top: rem(7);
+  padding-bottom: rem(2);
+  border-bottom: rem(1) solid $cGreenAccent;
+  color: $cGreen01;
+  font-weight: $medium;
+  font-size: rem(16);
+  line-height: calc(23 / 16);
+  @include mq {
+    margin-top: rem(11);
+    padding-bottom: 0;
+    font-size: rem(24);
+    line-height: calc(35 / 24);
+  }
+}
+.card-voice__image {
+  flex-shrink: 0;
+  position: relative;
+  width: rem(151);
+  max-width: 49%;
+  @include mq {
+    width: rem(180);
+  }
+}
+.card-voice__image::before {
+  content: "";
+  display: block;
+  padding-top: 77.8%;
+  // sp 117/151 = 77.483444%
+  // pc 140/180 = 77.777778%
+}
+.card-voice__image img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+.card-voice__content {
+  margin-top: rem(17);
+  @include mq {
+    margin-top: rem(43);
+  }
+}
+.card-voice__text {
+  color: $black;
+  // font-size: rem(16);
+}

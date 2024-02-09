@@ -1,0 +1,48 @@
+@use "global" as *;
+
+.blog {
+  padding-top: rem(80);
+  @include mq {
+    position: relative;
+    padding-top: rem(100);
+  }
+}
+.blog::before {
+  @include mq {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: zi(just-below);
+    width: 100%;
+    height: rem(500);
+    background-image: url(../images/top/blog-bg.webp);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+}
+.blog__inner{
+  max-width: rem(560);
+}
+.blog__cards {
+  margin-top: rem(24);
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: rem(6);
+  padding-right: rem(6);
+
+  @include mq {
+    margin-top: rem(76);
+    padding: 0;
+
+  }
+}
+.blog__button {
+  margin-top: rem(40);
+  text-align: center;
+  @include mq {
+    margin-top: rem(80);
+  }
+}

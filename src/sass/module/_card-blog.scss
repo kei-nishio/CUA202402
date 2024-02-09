@@ -1,0 +1,76 @@
+@use "global" as *;
+
+.card-blog {
+  display: block;
+  width: 100%;
+  box-shadow: rem(2) rem(2) rem(10) 0 rgba($black, 0.25);
+  background: $white;
+
+  @include mq {
+    &:hover .card-blog__image img {
+      transform: scale(1.35);
+    }
+  }
+}
+.card-blog__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: rem(16) rem(16) rem(21);
+  transition: opacity 0.3s;
+
+  &:hover {
+    @include mq {
+      opacity: 0.8;
+    }
+  }
+}
+.card-blog__image {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.card-blog__image::before {
+  content: "";
+  display: block;
+  padding-top: 66.8%;
+  // sp 201/301 = 66.777409%
+  // pc 201/301 = 66.777409%
+}
+.card-blog__image img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  @include mq {
+    transition: transform 0.5s;
+  }
+}
+
+.card-blog__body {
+  margin-top: rem(20);
+}
+.card-blog__date {
+  color: $cGreen01;
+  font-size: rem(12);
+}
+.card-blog__title {
+  margin-top: rem(1);
+  border-bottom: rem(2) solid $cGreenAccent;
+  color: $cGreen01;
+  font-weight: $normal;
+  font-size: rem(16);
+}
+.card-blog__content {
+  margin-top: rem(18);
+}
+.card-blog__text {
+  color: $cGreen01;
+  font-size: rem(16);
+}
+
+// モディファイヤー

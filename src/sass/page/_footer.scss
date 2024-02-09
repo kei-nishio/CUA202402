@@ -1,0 +1,86 @@
+@use "global" as *;
+
+.footer {
+  margin-top: rem(100);
+  position: relative;
+  padding-top: rem(48);
+  padding-bottom: rem(56);
+  background-color: $cGreenAccent;
+  @include mq {
+    margin-top: rem(160);
+    padding-top: rem(80);
+    padding-bottom: rem(80);
+  }
+}
+.footer.footer--thanks {
+  margin-top: rem(144);
+  @include mq {
+    margin-top: rem(120);
+  }
+}
+.footer.footer--404 {
+  margin-top: initial;
+  @include mq {
+    margin-top: initial;
+  }
+}
+.footer__inner {
+  max-width: rem(560);
+}
+
+.footer__logo-container {
+  @include mq {
+    display: flex;
+    align-items: end;
+    gap: rem(40);
+  }
+}
+.footer__logo {
+  width: rem(120);
+  @include mq {
+    width: rem(200);
+  }
+}
+.footer__sns-icons {
+  margin-top: rem(16);
+  @include mq {
+    margin-top: 0;
+    margin-bottom: rem(-2);
+  }
+}
+.footer__sns-icon:not(:first-of-type) {
+  margin-left: rem(12);
+}
+.footer__nav {
+  margin-top: rem(22);
+  @include mq {
+    margin-top: rem(14);
+  }
+}
+.footer__copy {
+  display: block;
+  margin-top: rem(40);
+  color: $white;
+  font-size: rem(12);
+  text-align: center;
+  @include mq {
+    margin-top: rem(73);
+    font-size: rem(14);
+  }
+}
+
+.footer__scroll-top-button {
+  position: absolute;
+  top: rem(-17);
+  right: rem(15);
+  transform: scale(0.6) translateY(-100%);
+  transform-origin: right top;
+  width: rem(80);
+  height: rem(80);
+  cursor: pointer;
+  @include mq {
+    top: rem(-21);
+    right: rem(20);
+    transform: scale(1) translateY(-100%);
+  }
+}

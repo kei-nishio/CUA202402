@@ -1,0 +1,15 @@
+@use "global" as *;
+
+.page-top {
+  margin-top: rem(56);
+  @include mq {
+    margin-top: rem(154);
+  }
+}
+
+.page-top.page-top--long {
+  margin-top: rem(125);
+  @include mq {
+    margin-top: rem(154);
+  }
+}

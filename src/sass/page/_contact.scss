@@ -1,0 +1,100 @@
+@use "global" as *;
+
+.contact__inner {
+  max-width: rem(560);
+}
+.contact__body {
+  @include mq {
+    display: flex;
+    padding: rem(80) 0;
+    box-shadow: rem(4) rem(4) rem(10) 0 rgba($black, 0.25);
+    background: #ffffff;
+  }
+}
+.contact__access {
+  padding-bottom: 0;
+  padding-left: rem(25);
+  padding-right: rem(25);
+  padding-top: 0;
+  @include mq {
+    width: 50%;
+    padding-left: rem(50);
+    padding-right: rem(50);
+  }
+}
+.contact__logo {
+  padding-bottom: rem(6);
+  border-bottom: rem(1) solid $cGreenAccent;
+  @include mq {
+    padding-bottom: rem(6);
+  }
+}
+.contact__logo img {
+  width: rem(174);
+  margin: 0 auto;
+  @include mq {
+    width: rem(200);
+  }
+}
+.contact__flex {
+  margin-top: rem(15);
+  @include mq {
+    display: flex;
+    justify-content: space-between;
+    margin-top: rem(24);
+  }
+}
+.contact__store-info {
+  font-style: normal;
+  font-family: $second-font-family;
+  text-align: center;
+  @include mq {
+    text-align: left;
+  }
+}
+.contact__store-info li:not(:first-of-type) {
+  margin-top: rem(4);
+}
+.contact__map {
+  height: rem(160);
+  margin-top: rem(16);
+  margin-right: auto;
+  margin-left: auto;
+  @include mq {
+    flex-shrink: 0;
+    width: 62%;
+    height: rem(148);
+    margin: 0;
+  }
+}
+.contact__map iframe {
+  width: 100%;
+  height: inherit;
+}
+.contact__guide {
+  padding-bottom: 0;
+  padding-left: rem(15);
+  padding-right: rem(15);
+  padding-top: rem(48);
+  @include mq {
+    width: calc(50% - rem(32) * 2);
+    margin: 0 rem(32);
+    padding-top: rem(26);
+    border-left: rem(1) solid $cGreenAccent;
+  }
+}
+
+.contact__text {
+  margin-top: rem(6);
+  color: $cGreenAccent;
+  font-size: rem(14);
+  line-height: calc(18 / 14);
+  text-align: center;
+  @include mq {
+    margin-top: rem(6);
+  }
+}
+.contact__button {
+  margin-top: rem(38);
+  text-align: center;
+}

@@ -1,0 +1,18 @@
+@use "global" as *;
+
+.voice__inner {
+  max-width: rem(560);
+}
+.voice__cards {
+  margin-top: rem(39);
+  @include mq {
+    margin-top: rem(25);
+  }
+}
+.voice__button {
+  margin-top: rem(40);
+  text-align: center;
+  @include mq {
+    margin-top: rem(80);
+  }
+}

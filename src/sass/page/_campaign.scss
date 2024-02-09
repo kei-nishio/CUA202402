@@ -1,0 +1,66 @@
+@use "global" as *;
+
+.campaign__swiper {
+  position: relative;
+  margin-top: rem(24);
+  @include mq {
+    margin-top: rem(36);
+  }
+
+  .swiper {
+    width: 100%;
+    padding-right: calc((100vw - 100%) / 2);
+    box-sizing: content-box;
+  }
+  .swiper-wrapper {
+    padding-bottom: rem(15);
+  }
+  .swiper-slide {
+    width: rem(280);
+    height: auto;
+
+    @include mq {
+      width: auto; //pcはjsで数（幅）管理。
+    }
+  }
+}
+
+// * Swiper button location
+.campaign__swiper-prev,
+.campaign__swiper-next {
+  display: none;
+  position: absolute;
+  top: rem(-25);
+  right: auto;
+  bottom: auto;
+  left: auto;
+  transform: translateY(-100%);
+  width: rem(80);
+  height: rem(80);
+  // trbl:auto;,m0p0はデフォルト値上書き用
+  margin: 0;
+  padding: 0;
+  @include mq {
+    //初期値flexに戻してあげる
+    display: flex;
+  }
+}
+.campaign__swiper-prev {
+  right: rem(160);
+}
+.campaign__swiper-next {
+  right: 0;
+}
+.campaign__swiper-prev::after,
+.campaign__swiper-next::after {
+  // ! swiper 初期矢印打消し用 for firefox
+  content: none;
+}
+.campaign__button {
+  // 15pxはswiperのpadding分
+  margin-top: calc(rem(40) - rem(15));
+  text-align: center;
+  @include mq {
+    margin-top: calc(rem(79) - rem(15));
+  }
+}

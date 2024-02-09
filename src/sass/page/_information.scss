@@ -1,0 +1,79 @@
+@use "global" as *;
+
+.information {
+  padding-bottom: rem(80);
+  padding-top: rem(80);
+  background-color: $cGreen02;
+  @include mq {
+    padding-bottom: rem(100);
+    padding-top: rem(100);
+  }
+}
+.information__inner {
+  max-width: rem(560);
+}
+.information__body {
+  margin-top: rem(23);
+  @include mq {
+    display: flex;
+    margin-top: rem(35);
+  }
+}
+.information__image-container {
+  width: 100%;
+  @include mq {
+    flex-shrink: 0;
+    width: 50%;
+  }
+}
+.information__image {
+  position: relative;
+  width: 100%;
+}
+.information__image::before {
+  content: "";
+  display: block;
+  padding-top: 65.8%;
+  // sp 227/345 = 65.797101%
+  // pc 356/540 = 65.925926%
+}
+.information__image img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+.information__text-box {
+  @include mq {
+    display: block;
+    padding-top: rem(60);
+    margin-left: rem(48);
+  }
+}
+.information__sub-title {
+  margin-top: rem(27);
+  border-bottom: rem(2) solid $cGreenAccent;
+  color: $cGreen01;
+  font-weight: $bold;
+  font-size: rem(20);
+  line-height: 1.2;
+  @include mq {
+    margin-top: rem(3);
+    padding-bottom: rem(4);
+    font-size: rem(24);
+    line-height: 1;
+  }
+}
+.information__text {
+  margin-top: rem(6);
+  color: $cGreen01;
+  font-family: $second-font-family;
+}
+.information__button {
+  margin-top: rem(39);
+  text-align: center;
+}

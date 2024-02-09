@@ -1,0 +1,16 @@
+@use "global" as *;
+
+.cards02 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: rem(40) rem(40);
+  justify-items: center;
+  @include mq {
+    gap: rem(80) rem(40);
+  }
+}
+.cards02.cards02--c2{
+  @include mq {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
