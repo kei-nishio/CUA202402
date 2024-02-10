@@ -124,7 +124,7 @@
                   // 公開/非公開の判定
                   $public = get_field('acf_campaign_public');
                   if ($public === false) {
-                    break;
+                    continue;
                     // 全ての記事が非公開の時はカードが表示されなくなります。
                   }
                   ?>
@@ -280,68 +280,50 @@
         <div class="section-title__en">blog</div>
         <h2 class="section-title__ja">ブログ</h2>
       </div>
-
       <ul class="blog__cards cards01 cards01--c3">
-        <li class="cards01__card">
-          <div class="card-blog">
-            <a href="./blog.html" class="card-blog__link">
-              <figure class="card-blog__image">
-                <img src="./assets/images/blog-card/blog-card01.webp" alt="ピンク色の枝状の珊瑚" />
-              </figure>
-              <div class="card-blog__body">
-                <time class="card-blog__date" datetime="2023-11-17">2023.11/17</time>
-                <h3 class="card-blog__title">ライセンス取得</h3>
-                <div class="card-blog__content">
-                  <p class="card-blog__text">
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-                  </p>
-                </div>
+        <?php
+        $args = array(
+          "post_type" => "post", //post通常投稿
+          "posts_per_page" => 3, //表示件数（-1で全件）
+          "orderby" => "date", // data投稿日時、titeタイトル、modified最終更新日時、comment_countコメント数
+          "order" => "DESC", //ACS昇順、DESC降順
+        );
+        $the_query = new WP_Query($args);
+        ?>
+        <?php if ($the_query->have_posts()) : ?>
+          <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+            <?php
+            $post_id = get_the_ID(); // 投稿の ID を指定
+            $thumbnail_id = get_post_thumbnail_id($post_id); // アイキャッチ画像の ID を取得
+            $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
+            ?>
+            <li class="cards01__card">
+              <div class="card-blog">
+                <a href="<?php the_permalink(); ?>" class="card-blog__link">
+                  <figure class="card-blog__image">
+                    <?php if (has_post_thumbnail()) : ?>
+                      <img src="<?php the_post_thumbnail_url("full"); ?>" alt="<?php echo esc_attr($alt); ?>">
+                    <?php else : ?>
+                      <img src="<?php echo esc_url(get_theme_file_uri("/assets/images/common/noimage.jpg")); ?>" alt="ノーイメージ画像" />
+                    <?php endif; ?>
+                  </figure>
+                  <div class="card-blog__body">
+                    <time class="card-blog__date" datetime="<?php the_time("c"); ?>"><?php the_time("Y.m/d"); ?></time>
+                    <h3 class="card-blog__title"><?php the_title(); ?></h3>
+                    <div class="card-blog__content">
+                      <p class="card-blog__text">
+                        <?php echo esc_html(mb_strimwidth(strip_tags(get_the_content()), 0, 100 * 2, '')); ?>
+                      </p>
+                    </div>
+                  </div>
+                </a>
               </div>
-            </a>
-          </div>
-        </li>
-        <li class="cards01__card">
-          <div class="card-blog">
-            <a href="./blog.html" class="card-blog__link">
-              <figure class="card-blog__image">
-                <img src="./assets/images/blog-card/blog-card02.webp" alt="ウミガメが海中を泳いでこちらに向かってきている様子" />
-              </figure>
-              <div class="card-blog__body">
-                <time class="card-blog__date" datetime="2023-11-17">2023.11/17</time>
-                <h3 class="card-blog__title">ウミガメと泳ぐ</h3>
-                <div class="card-blog__content">
-                  <p class="card-blog__text">
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </li>
-        <li class="cards01__card">
-          <div class="card-blog">
-            <a href="./blog.html" class="card-blog__link">
-              <figure class="card-blog__image">
-                <img src="./assets/images/blog-card/blog-card03.webp" alt="カクレクマノミが磯巾着の中に隠れている様子" />
-              </figure>
-              <div class="card-blog__body">
-                <time class="card-blog__date" datetime="2023-11-17">2023.11/17</time>
-                <h3 class="card-blog__title">カクレクマノミ</h3>
-                <div class="card-blog__content">
-                  <p class="card-blog__text">
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </li>
+            </li>
+          <?php endwhile; ?>
+          <?php wp_reset_postdata(); ?>
+        <?php else : ?>
+          <li>記事が投稿されていません</li>
+        <?php endif; ?>
       </ul>
       <div class="blog__button">
         <a href="./blog.html" class="button">
@@ -360,66 +342,82 @@
         <h2 class="section-title__ja">お客様の声</h2>
       </div>
 
+      <?php
+      $args = array(
+        "post_type" => "voice", //post通常投稿
+        "posts_per_page" => -1, //表示件数（-1で全件）
+        "orderby" => "date", // data投稿日時、titeタイトル、modified最終更新日時、comment_countコメント数
+        "order" => "DESC", //ACS昇順、DESC降順
+      );
+      $the_query = new WP_Query($args);
+      ?>
       <ul class="voice__cards cards02 cards02--c2">
-        <li class="cards02__card">
-          <div class="card-voice">
-            <a href="./voice.html" class="card-voice__link">
-              <div class="card-voice__body">
-                <div class="card-voice__flex">
-                  <div class="card-voice__heading">
-                    <div class="card-voice__meta">
-                      <p class="card-voice__information">20代&#040;女性&#041;</p>
-                      <span class="card-voice__category category-diving">ライセンス講習</span>
+        <?php if ($the_query->have_posts()) : ?>
+          <?php $i = 0 ?>
+          <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+            <?php
+            // 公開/非公開の判定
+            $public = get_field('acf_voice_public');
+            if ($public === false) {
+              continue;
+            }
+            // 記事を2つだけ表示する
+            if ($i >= 2) {
+              break;
+            }
+            $i++;
+            ?>
+            <?php
+            $post_id = get_the_ID(); // 投稿の ID を指定
+            $thumbnail_id = get_post_thumbnail_id($post_id); // アイキャッチ画像の ID を取得
+            $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
+            ?>
+            <?php
+            // カスタムフィールドの値を取得
+            $age_gender = esc_html(get_field('acf_age_gender'));
+            $customer_category_id = get_field('acf_diving_category');
+            $image = get_field('acf_customer_image');
+            $customer_voice = esc_html(get_field('acf_customer_voice'));
+            // タクソノミーと画像URLの取得
+            $taxonomy = 'diving_category';
+            $customer_category = esc_html(get_term($customer_category_id, $taxonomy)->name);
+            $image_url = esc_url($image['url']);
+            $image_alt = esc_attr($image['alt']);
+            ?>
+            <?php echo esc_attr($alt); ?>
+            <li class="cards02__card">
+              <div class="card-voice">
+                <a href="./voice.html" class="card-voice__link">
+                  <div class="card-voice__body">
+                    <div class="card-voice__flex">
+                      <div class="card-voice__heading">
+                        <div class="card-voice__meta">
+                          <p class="card-voice__information">
+                            <?php echo $age_gender; ?></p>
+                          <span class="card-voice__category category-diving"><?php echo $customer_category; ?></span>
+                        </div>
+                        <h3 class="card-voice__title"><?php the_title(); ?></h3>
+                      </div>
+                      <figure class="card-voice__image js-colorbox">
+                        <img src="<?php echo $image_url ?>" alt="<?php echo $image_url ?>" />
+                      </figure>
                     </div>
-                    <h3 class="card-voice__title">ここにタイトルが入ります。ここにタイトル</h3>
-                  </div>
-                  <figure class="card-voice__image js-colorbox">
-                    <img src="./assets/images/voice-card/voice-card01.webp" alt="麦わら帽子と白いTシャツの笑顔の女性" />
-                  </figure>
-                </div>
-                <div class="card-voice__content">
-                  <p class="card-voice__text">
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </li>
-        <li class="cards02__card">
-          <div class="card-voice">
-            <a href="./voice.html" class="card-voice__link">
-              <div class="card-voice__body">
-                <div class="card-voice__flex">
-                  <div class="card-voice__heading">
-                    <div class="card-voice__meta">
-                      <p class="card-voice__information">30代&#040;男性&#041;</p>
-                      <span class="card-voice__category category-diving">ファンダイビング</span>
+                    <div class="card-voice__content">
+                      <p class="card-voice__text">
+                        <?php echo $customer_voice; ?>
+                      </p>
                     </div>
-                    <h3 class="card-voice__title">ここにタイトルが入ります。ここにタイトル</h3>
                   </div>
-                  <figure class="card-voice__image js-colorbox">
-                    <img src="./assets/images/voice-card/voice-card02.webp" alt="サムズアップした紺色Yシャツの男性" />
-                  </figure>
-                </div>
-                <div class="card-voice__content">
-                  <p class="card-voice__text">
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。
-                  </p>
-                </div>
+                </a>
               </div>
-            </a>
-          </div>
-        </li>
+            </li>
+          <?php endwhile; ?>
+          <?php wp_reset_postdata(); ?>
+        <?php else : ?>
+          <li>記事が投稿されていません</li>
+        <?php endif; ?>
       </ul>
+
       <div class="voice__button">
         <a href="./voice.html" class="button">
           <p>view more</p>
