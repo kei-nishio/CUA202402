@@ -57,7 +57,7 @@ function wpcf7_autop_return_false()
   return false;
 }
 
-// ! カスタム投稿タイプのラベルを変更する
+// ! 通常投稿タイプのラベルを変更する
 add_action('init', 'Change_objectlabel');
 add_action('admin_menu', 'Change_menulabel');
 function Change_menulabel()
@@ -94,3 +94,14 @@ function custom_redirect_custom_post_types()
     exit;
   }
 }
+
+// ! Smart Custom Field のオプション投稿設定
+/**
+ * @param string $page_title ページのtitle属性値
+ * @param string $menu_title 管理画面のメニューに表示するタイトル
+ * @param string $capability メニューを操作できる権限（manage_options とか）
+ * @param string $menu_slug オプションページのスラッグ。ユニークな値にすること。
+ * @param string|null $icon_url メニューに表示するアイコンの URL
+ * @param int $position メニューの位置
+ */
+SCF::add_options_page('料金', '料金一覧', 'manage_options', 'price-options', 'dashicons-money-alt', '6');
