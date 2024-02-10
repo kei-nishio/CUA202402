@@ -4,15 +4,15 @@
     <div class="footer__body">
       <div class="footer__logo-container">
         <div class="footer__logo">
-          <img src="./assets/images/common/logo.svg" alt="コードアップス" />
+          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/logo.svg" alt="コードアップス" />
         </div>
 
         <div class="footer__sns-icons">
           <a href="https://www.facebook.com/" class="footer__sns-icon icon" target="_blank">
-            <img src="./assets/images/sns/facebook.svg" alt="facebookのアイコン" />
+            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/sns/facebook.svg" alt="facebookのアイコン" />
           </a>
           <a href="https://www.instagram.com/" class="footer__sns-icon icon" target="_blank">
-            <img src="./assets/images/sns/Instagram.svg" alt="Instagramのアイコン" />
+            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/sns/Instagram.svg" alt="Instagramのアイコン" />
           </a>
         </div>
       </div>

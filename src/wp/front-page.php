@@ -9,10 +9,11 @@
       </div>
       <div class="loading__flex">
         <?php
-        // ローディング画像の取得
+        // カスタムフィールドの1つ目からローディング画像の取得
         $image_pc = get_field('acf_fv_image_pc_1');
         $image_sp = get_field('acf_fv_image_sp_1');
         $image_no_image = get_template_directory_uri() . '/assets/images/common/noimage.jpg';
+        // PC画像がある場合はPC画像を、ない場合はnoimageを表示
         if ($image_pc) {
           $url_pc = esc_url($image_pc['url']);
           $alt = esc_attr($image_pc['alt']);
@@ -20,6 +21,7 @@
           $url_pc = $image_no_image;
           $alt = 'ノーイメージ';
         }
+        // SP画像がある場合はSP画像を、ない場合はnoimageを表示
         if ($image_sp) {
           $url_sp = esc_url($image_sp['url']);
         } else {
@@ -101,25 +103,29 @@
       <!-- Campaign Swiper -->
       <div class="campaign__swiper js-campaign-swiper">
         <div class="swiper">
-
           <?php
+          // サブループからキャンペーン記事を取得
           $args = array(
             "post_type" => "campaign", //post通常投稿
             "posts_per_page" => -1, //表示件数（-1で全件）
-            "orderby" => "date", // data投稿日時、titeタイトル、modified最終更新日時、comment_countコメント数
+            "orderby" => "modified", // data投稿日時、modified最終更新日時
             "order" => "DESC", //ACS昇順、DESC降順
           );
           $the_query = new WP_Query($args);
           ?>
           <ul class="swiper-wrapper">
             <?php if ($the_query->have_posts()) : ?>
-              <?php for ($i = 0; $i < 2; $i++) { ?>
+              <?php
+              // 2回ループして2倍の記事を取得（swiper10用）
+              for ($i = 0; $i < 2; $i++) {
+              ?>
                 <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
                   <?php
                   // 公開/非公開の判定
                   $public = get_field('acf_campaign_public');
                   if ($public === false) {
                     break;
+                    // 全ての記事が非公開の時はカードが表示されなくなります。
                   }
                   ?>
                   <li class="swiper-slide">
@@ -139,6 +145,7 @@
                         </figure>
                         <div class="card-campaign__meta">
                           <?php
+                          // タクソノミーの表示
                           $taxonomy = 'diving_category';
                           $terms = get_the_terms($post_id, $taxonomy);
                           if (!is_wp_error($terms) && !empty($terms)) {
@@ -152,6 +159,7 @@
 
                           <div class="card-campaign__prices">
                             <?php
+                            // カスタムフィールドの金額を取得
                             $price_before = number_format(get_field('acf_parice_before'));
                             $price_after = number_format(get_field('acf_parice_after'));
                             ?>
@@ -203,10 +211,10 @@
         <div class="about-us__images-box">
           <div class="about-us__images">
             <div class="about-us__image01">
-              <img src="./assets/images/about-us/about-us01.webp" alt="青い空を背景にしてレンガ色の瓦にシーサーがいる様子" />
+              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/about-us01.webp" alt="青い空を背景にしてレンガ色の瓦にシーサーがいる様子" />
             </div>
             <div class="about-us__image02">
-              <img src="./assets/images/about-us/about-us02.webp" alt="浅瀬の透き通った海中に2匹の黄色い熱帯魚が泳いでいる様子" />
+              <img src="<?php echo get_theme_file_uri(); ?>/assets/images/about-us/about-us02.webp" alt="浅瀬の透き通った海中に2匹の黄色い熱帯魚が泳いでいる様子" />
             </div>
           </div>
         </div>
@@ -244,7 +252,7 @@
       <div class="information__body">
         <div class="information__image-container">
           <figure class="information__image js-colorbox">
-            <img src="./assets/images/top/information01.webp" alt="サンゴ礁と黄色い熱帯魚" />
+            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/top/information01.webp" alt="サンゴ礁と黄色い熱帯魚" />
           </figure>
         </div>
         <div class="information__text-box">
@@ -430,7 +438,7 @@
       </div>
       <div class="price__body">
         <figure class="price__image-sp u-mobile js-colorbox">
-          <img src="./assets/images/top/price01-sp.webp" alt="海を泳ぐアカウミガメを右側から撮影した写真" />
+          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/top/price01-sp.webp" alt="海を泳ぐアカウミガメを右側から撮影した写真" />
         </figure>
         <ul class="price__lists">
           <li class="price__list">
@@ -489,7 +497,7 @@
           </li>
         </ul>
         <figure class="price__image-pc u-desktop js-colorbox">
-          <img src="./assets/images/top/price02-pc.webp" alt="サンゴ礁の海を緋色の小魚の群れが泳いでいる様子" />
+          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/top/price02-pc.webp" alt="サンゴ礁の海を緋色の小魚の群れが泳いでいる様子" />
         </figure>
       </div>
       <div class="price__button">
@@ -507,7 +515,7 @@
       <div class="contact__body">
         <div class="contact__access">
           <div class="contact__logo">
-            <img src="./assets/images/common/logo-green.svg" alt="コードアップス" />
+            <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/logo-green.svg" alt="コードアップス" />
           </div>
           <div class="contact__flex">
             <address class="contact__store-info">

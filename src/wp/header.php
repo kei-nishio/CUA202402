@@ -20,7 +20,7 @@
       <!-- logo -->
       <h1 class="header__logo">
         <a href="./" class="header__logo-link">
-          <img src="./assets/images/common/logo.svg" alt="コードアップス" />
+          <img src="<?php echo get_theme_file_uri(); ?>/assets/images/common/logo.svg" alt="コードアップス" />
         </a>
       </h1>
 
