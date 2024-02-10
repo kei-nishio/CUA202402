@@ -438,7 +438,21 @@
         <figure class="price__image-sp u-mobile js-colorbox">
           <img src="<?php echo get_theme_file_uri(); ?>/assets/images/top/price01-sp.webp" alt="海を泳ぐアカウミガメを右側から撮影した写真" />
         </figure>
+
         <ul class="price__lists">
+
+          <?php
+          $field_category = SCF::get_option_meta('price-options', 'scf_diving_category1');
+          echo $field_category;
+          ?>
+          <?php
+          $fields = SCF::get_option_meta('price-options', 'scf_diving_category1_group');
+          foreach ($fields as $field_name => $fields_value) {
+          ?>
+            <?php echo $fields_value['scfdivingcategory1course']; ?>
+            <?php echo $fields_value['scfdivingcategory1price']; ?>
+          <?php } ?>
+
           <li class="price__list">
             <div class="diving-products">
               <h3 class="diving-products__category">ライセンス講習</h3>
