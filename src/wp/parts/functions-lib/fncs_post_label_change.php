@@ -1,5 +1,5 @@
 <?php
-// ! 通常投稿タイプのラベルを変更する
+// ! 通常投稿タイプのラベルを変更する（「投稿」⇒「ブログ」）
 add_action('init', 'Change_objectlabel');
 add_action('admin_menu', 'Change_menulabel');
 function Change_menulabel()

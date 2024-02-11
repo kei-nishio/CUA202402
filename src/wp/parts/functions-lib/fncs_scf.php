@@ -8,5 +8,5 @@
  * @param string|null $icon_url メニューに表示するアイコンの URL
  * @param int $position メニューの位置
  * @link　https://2inc.org/blog/2016/06/06/5280/
+ * @uses SCF::add_options_page('料金', '料金一覧', 'manage_options', 'price-options', 'dashicons-money-alt', '6');
  */
-SCF::add_options_page('料金', '料金一覧', 'manage_options', 'price-options', 'dashicons-money-alt', '6');
