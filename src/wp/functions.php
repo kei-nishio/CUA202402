@@ -20,7 +20,7 @@ function my_setup()
 get_template_part("/parts/functions-lib/fncs_script");
 
 // ! カスタム投稿の表示件数を設定する
-// get_template_part("/parts/functions-lib/fncs_posts_page");
+get_template_part("/parts/functions-lib/fncs_posts_page");
 
 // ! Contact Form 7で自動挿入されるPタグ、brタグを削除
 get_template_part("/parts/functions-lib/fncs_wpcf7_reset");

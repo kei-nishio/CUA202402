@@ -128,13 +128,13 @@
                     // 全ての記事が非公開の時はカードが表示されなくなります。
                   }
                   ?>
+                  <?php
+                  $post_id = get_the_ID(); // 投稿の ID を指定
+                  $thumbnail_id = get_post_thumbnail_id($post_id); // アイキャッチ画像の ID を取得
+                  $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
+                  ?>
                   <li class="swiper-slide">
                     <div class="campaign__card card-campaign">
-                      <?php
-                      $post_id = get_the_ID(); // 投稿の ID を指定
-                      $thumbnail_id = get_post_thumbnail_id($post_id); // アイキャッチ画像の ID を取得
-                      $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
-                      ?>
                       <a href="./campaign.html" class="card-campaign__link">
                         <figure class="card-campaign__image">
                           <?php if (has_post_thumbnail()) : ?>
@@ -145,13 +145,13 @@
                         </figure>
                         <div class="card-campaign__meta">
                           <?php
-                          // タクソノミーの表示
+                          // タクソノミーを表示
                           $taxonomy = 'diving_category';
                           $terms = get_the_terms($post_id, $taxonomy);
-                          if (!is_wp_error($terms) && !empty($terms)) {
-                            echo '<span class="card-campaign__category category-diving">' . esc_html($terms[0]->name) . '</span>';
-                          }
+                          if (!is_wp_error($terms) && !empty($terms)) :
                           ?>
+                            <span class="card-campaign__category category-diving"><?php echo esc_html($terms[0]->name); ?></span>
+                          <?php endif; ?>
                           <h3 class="card-campaign__title"><?php the_title(); ?></h3>
                         </div>
                         <div class="card-campaign__content">
@@ -163,8 +163,12 @@
                             $price_before = number_format(get_field('acf_parice_before'));
                             $price_after = number_format(get_field('acf_parice_after'));
                             ?>
-                            <span class="card-campaign__price-before">&#165;<?php echo $price_before; ?></span>
-                            <span class="card-campaign__price-after">&#165;<?php echo $price_after; ?></span>
+                            <span class="card-campaign__price-before">
+                              <?php echo esc_html('¥' . $price_before); ?>
+                            </span>
+                            <span class="card-campaign__price-after">
+                              <?php echo esc_html('¥' . $price_after); ?>
+                            </span>
                           </div>
                         </div>
                       </a>
