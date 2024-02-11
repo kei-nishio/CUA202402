@@ -3,22 +3,38 @@
 .breadcrumb {
   margin-top: rem(10);
 }
-.breadcrumb__text {
+.breadcrumb span {
+  display: inline-block;
+}
+.breadcrumb__container {
+  display: flex;
+  align-items: baseline;
+  gap: rem(5);
   color: $cGreen01;
   font-size: rem(14);
   line-height: 1;
   font-family: $second-font-family;
-  cursor: pointer;
 }
 
 .breadcrumb.breadcrumb--404 {
   margin-top: initial;
   padding-top: rem(88);
   background-color: $cGreenAccent;
+
   @include mq {
     padding-top: rem(98);
   }
-  & .breadcrumb__text {
+  & .breadcrumb__container {
     color: $white;
   }
+}
+
+.breadcrumb__separator {
+  display: inline-block;
+  transform: rotate(45deg);
+  transform-origin: right top;
+  width: rem(6);
+  height: rem(6);
+  border-top: 1px solid $cGreen01;
+  border-right: 1px solid $cGreen01;
 }

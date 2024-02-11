@@ -16,13 +16,8 @@
     </div>
   </section>
 
-  <!-- ! パンくずは仮です -->
   <!-- Breadcrumb -->
-  <div class="breadcrumb">
-    <div class="breadcrumb__inner inner">
-      <div class="breadcrumb__text">TOP > キャンペーン</div>
-    </div>
-  </div>
+  <?php get_template_part("/parts/common/p-breadcrumb"); ?>
 
   <!-- Campaign -->
   <div class="page-campaign page-top treatment">
