@@ -438,75 +438,43 @@
         <figure class="price__image-sp u-mobile js-colorbox">
           <img src="<?php echo get_theme_file_uri(); ?>/assets/images/top/price01-sp.webp" alt="海を泳ぐアカウミガメを右側から撮影した写真" />
         </figure>
-
+        <?php
+        $args = array(
+          "post_type" => "price_custom", //post通常投稿
+          "posts_per_page" => -1, //表示件数（-1で全件）
+          "orderby" => "ID", // data投稿日時、titeタイトル、modified最終更新日時、comment_countコメント数
+          "order" => "DESC", //ACS昇順、DESC降順
+        );
+        $the_query = new WP_Query($args);
+        ?>
         <ul class="price__lists">
-
-          <?php
-          $field_category = SCF::get_option_meta('price-options', 'scf_diving_category1');
-          echo $field_category;
-          ?>
-          <?php
-          $fields = SCF::get_option_meta('price-options', 'scf_diving_category1_group');
-          foreach ($fields as $field_name => $fields_value) {
-          ?>
-            <?php echo $fields_value['scfdivingcategory1course']; ?>
-            <?php echo $fields_value['scfdivingcategory1price']; ?>
-          <?php } ?>
-
-          <li class="price__list">
-            <div class="diving-products">
-              <h3 class="diving-products__category">ライセンス講習</h3>
-              <dl class="diving-products__list">
-                <dt class="diving-products__name">オープンウォーターダイバーコース</dt>
-                <dd class="diving-products__price">&#165;50,000</dd>
-                <dt class="diving-products__name">アドバンスドオープンウォーターコース</dt>
-                <dd class="diving-products__price">&#165;60,000</dd>
-                <dt class="diving-products__name">レスキュー＋EFRコース</dt>
-                <dd class="diving-products__price">&#165;70,000</dd>
-              </dl>
-            </div>
-          </li>
-          <li class="price__list">
-            <div class="diving-products">
-              <h3 class="diving-products__category">体験ダイビング</h3>
-              <dl class="diving-products__list">
-                <dt class="diving-products__name">ビーチ体験ダイビング&#040;半日&#041;</dt>
-                <dd class="diving-products__price">&#165;7,000</dd>
-                <dt class="diving-products__name">ビーチ体験ダイビング&#040;1日&#041;</dt>
-                <dd class="diving-products__price">&#165;14,000</dd>
-                <dt class="diving-products__name">ボート体験ダイビング&#040;半日&#041;</dt>
-                <dd class="diving-products__price">&#165;10,000</dd>
-                <dt class="diving-products__name">ボート体験ダイビング&#040;1日&#041;</dt>
-                <dd class="diving-products__price">&#165;18,000</dd>
-              </dl>
-            </div>
-          </li>
-          <li class="price__list">
-            <div class="diving-products">
-              <h3 class="diving-products__category">ファンダイビング</h3>
-              <dl class="diving-products__list">
-                <dt class="diving-products__name">ビーチダイビング&#040;2ダイブ&#041;</dt>
-                <dd class="diving-products__price">&#165;14,000</dd>
-                <dt class="diving-products__name">ボートダイビング&#040;2ダイブ&#041;</dt>
-                <dd class="diving-products__price">&#165;18,000</dd>
-                <dt class="diving-products__name">スペシャルダイビング&#040;2ダイブ&#041;</dt>
-                <dd class="diving-products__price">&#165;24,000</dd>
-                <dt class="diving-products__name">ナイトダイビング&#040;1ダイブ&#041;</dt>
-                <dd class="diving-products__price">&#165;10,000</dd>
-              </dl>
-            </div>
-          </li>
-          <li class="price__list">
-            <div class="diving-products">
-              <h3 class="diving-products__category">スペシャルダイビング</h3>
-              <dl class="diving-products__list">
-                <dt class="diving-products__name">貸切ダイビング&#040;2ダイブ&#041;</dt>
-                <dd class="diving-products__price">&#165;24,000</dd>
-                <dt class="diving-products__name">1日ダイビング&#040;3ダイブ&#041;</dt>
-                <dd class="diving-products__price">&#165;32,000</dd>
-              </dl>
-            </div>
-          </li>
+          <?php if ($the_query->have_posts()) : ?>
+            <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+              <?php $post_id = get_the_ID(); ?>
+              <?php $category_group = 'scf_diving_category_group'; ?>
+              <li class="price__list">
+                <div class="diving-products">
+                  <h3 class="diving-products__category"><?php the_title(); ?></h3>
+                  <dl class="diving-products__list">
+                    <?php
+                    $fields = SCF::get($category_group, $post_id);
+                    foreach ($fields as $field) {
+                    ?>
+                      <dt class="diving-products__name">
+                        <?php echo esc_html($field['scfdivingcategorycourse']); ?>
+                      </dt>
+                      <dd class="diving-products__price">
+                        <?php echo esc_html('¥' . number_format($field['scfdivingcategoryprice'])); ?>
+                      </dd>
+                    <?php } ?>
+                  </dl>
+                </div>
+              </li>
+            <?php endwhile; ?>
+            <?php wp_reset_postdata(); ?>
+          <?php else : ?>
+            <li>記事が投稿されていません</li>
+          <?php endif; ?>
         </ul>
         <figure class="price__image-pc u-desktop js-colorbox">
           <img src="<?php echo get_theme_file_uri(); ?>/assets/images/top/price02-pc.webp" alt="サンゴ礁の海を緋色の小魚の群れが泳いでいる様子" />
