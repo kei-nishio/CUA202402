@@ -9,7 +9,7 @@
         </div>
 
         <picture class="sub-view__image">
-          <source srcset="./assets/images/main-view/main-view-campaign-pc.webp" media="(min-width:768px)" />
+          <source srcset="<?php echo get_theme_file_uri(); ?>/assets/images/main-view/main-view-campaign-pc.webp" media="(min-width:768px)" />
           <img src="<?php echo get_theme_file_uri(); ?>/assets/images/main-view/main-view-campaign-sp.webp" alt="2匹の黄色熱帯魚が浅瀬近くを泳いでいる様子" />
         </picture>
       </div>
@@ -124,17 +124,8 @@
       </ul>
 
       <!-- Pagination -->
-      <div class="page-campaign__pagination pagination">
-        <div class="pagination__body">
-          <div class="pagination__prev">＜</div>
-          <div class="pagination__number js-pagination-number is-active">1</div>
-          <div class="pagination__number js-pagination-number">2</div>
-          <div class="pagination__number js-pagination-number">3</div>
-          <div class="pagination__number js-pagination-number">4</div>
-          <div class="pagination__number js-pagination-number">5</div>
-          <div class="pagination__number js-pagination-number">6</div>
-          <div class="pagination__next">＞</div>
-        </div>
+      <div class="page-campaign__pagination">
+        <?php wp_pagenavi(); ?>
       </div>
     </div>
   </div>
