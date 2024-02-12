@@ -1,4 +1,5 @@
 const { src, dest, watch, series, parallel } = require("gulp"); // Gulpの基本関数をインポート
+const os = require('os'); //osモジュールを読み込む
 const sass = require("gulp-sass")(require("sass")); // SCSSをCSSにコンパイルするためのモジュール
 const plumber = require("gulp-plumber"); // エラーが発生してもタスクを続行するためのモジュール
 const notify = require("gulp-notify"); // エラーやタスク完了の通知を表示するためのモジュール
@@ -21,14 +22,14 @@ const webp = require("gulp-webp"); //webp変換
 const rename = require("gulp-rename"); //ファイル名変更
 
 const browsers = ["last 2 versions", "> 5%", "ie = 11", "not ie <= 10", "ios >= 8", "and_chr >= 5", "Android >= 5"];
+const userHomeDir = os.homedir(); // ホームディレクトリを取得：C:\Users\userName
 
 const wpMode = true; // ! WordPressの場合はtrueにする（静的コーディングのみの場合はfalse）
-const userName = "k2y_c"; // ! your user name
 const siteTitle = "codeups-wp-kei"; // ! WordPress site title (project name)
 const themeName = "codeupsoriginaltheme"; // ! WordPress theme file name
 const localSiteDomain = "codeups-wp-kei.local"; // ! WordPress Local Site Domain
 
-const wpDirectory = `C:/Users/${userName}/Local Sites/${siteTitle}/app/public/wp-content/themes/${themeName}`;
+const wpDirectory = `${userHomeDir}/Local Sites/${siteTitle}/app/public/wp-content/themes/${themeName}`;
 
 // 読み込み先
 const srcPath = {
