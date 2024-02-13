@@ -212,6 +212,10 @@ jQuery(function ($) {
   // * カテゴリータグをactiveにする & Information記事を切り替える
   const categoryButton = $(".js-category-button");
   const categoryContent = $(".js-category-content");
+  // 初期表示
+  categoryButton.eq(0).addClass("is-active");
+  categoryContent.eq(0).addClass("is-active");
+  // ボタンをクリックしたらactiveにする
   categoryButton.on("click", function () {
     let index = categoryButton.index(this);
     categoryButton.removeClass("is-active");
@@ -219,7 +223,8 @@ jQuery(function ($) {
     $(this).addClass("is-active");
     categoryContent.eq(index).addClass("is-active");
   });
-  // *　target-id付リンクを踏んだ時にリンク先のInformation記事を切り替える
+  
+  // * target-id付リンクを踏んだ時にリンク先のInformation記事を切り替える
   $(function () {
     let linkId = new URL(window.location.href).searchParams.get("id");
     if (linkId) {
