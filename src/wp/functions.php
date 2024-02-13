@@ -32,7 +32,7 @@ get_template_part("/parts/functions-lib/fncs_post_label_change");
 get_template_part("/parts/functions-lib/fncs_redirect_singular");
 
 // ! Smart Custom Field のオプション投稿を追加する
-// get_template_part("/parts/functions-lib/fncs_scf");
+get_template_part("/parts/functions-lib/fncs_scf");
 
 // ! カスタムメニューを追加する
 // get_template_part("/parts/functions-lib/fncs_add_menu");
