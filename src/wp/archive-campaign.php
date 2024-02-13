@@ -68,14 +68,6 @@
         <?php if (have_posts()) : ?>
           <?php while (have_posts()) : the_post(); ?>
             <?php
-            // 公開/非公開の判定
-            $public = get_field('acf_campaign_public');
-            if ($public === false) {
-              continue;
-              // 全ての記事が非公開の時はカードが表示されなくなります。
-            }
-            ?>
-            <?php
             $post_id = get_the_ID(); // 投稿の ID を指定
             $thumbnail_id = get_post_thumbnail_id($post_id); // アイキャッチ画像の ID を取得
             $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得

@@ -121,14 +121,6 @@
               ?>
                 <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
                   <?php
-                  // 公開/非公開の判定
-                  $public = get_field('acf_campaign_public');
-                  if ($public === false) {
-                    continue;
-                    // 全ての記事が非公開の時はカードが表示されなくなります。
-                  }
-                  ?>
-                  <?php
                   $post_id = get_the_ID(); // 投稿の ID を指定
                   $thumbnail_id = get_post_thumbnail_id($post_id); // アイキャッチ画像の ID を取得
                   $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
@@ -320,7 +312,7 @@
       <?php
       $args = array(
         "post_type" => "voice", //post通常投稿
-        "posts_per_page" => -1, //表示件数（-1で全件）
+        "posts_per_page" => 2, //表示件数（-1で全件）
         "orderby" => "date", // data投稿日時、titeタイトル、modified最終更新日時、comment_countコメント数
         "order" => "DESC", //ACS昇順、DESC降順
       );
@@ -330,18 +322,6 @@
         <?php if ($the_query->have_posts()) : ?>
           <?php $i = 0 ?>
           <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-            <?php
-            // 公開/非公開の判定
-            $public = get_field('acf_voice_public');
-            if ($public === false) {
-              continue;
-            }
-            // 記事を2つだけ表示する
-            if ($i >= 2) {
-              break;
-            }
-            $i++;
-            ?>
             <?php
             $post_id = get_the_ID(); // 投稿の ID を指定
             $thumbnail_id = get_post_thumbnail_id($post_id); // アイキャッチ画像の ID を取得
