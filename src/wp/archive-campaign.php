@@ -25,10 +25,41 @@
       <!-- Categories -->
       <div class="page-campaign__categories categories">
         <ul class="categories__items">
-          <li class="categories__item"><a href="#" class="categories__link is-active">ALL</a></li>
-          <li class="categories__item"><a href="#" class="categories__link">ライセンス講習</a></li>
-          <li class="categories__item"><a href="#" class="categories__link">体験ダイビング</a></li>
-          <li class="categories__item"><a href="#" class="categories__link">ファンダイビング</a></li>
+          <?php
+          // カスタム投稿一覧ページのリンク
+          $home_class = (is_post_type_archive()) ? 'is-active' : '';
+          $home_link = sprintf(
+            '<li class="categories__item %s"><a href="%s" class="categories__link" title="%s">%s</a></li>',
+            $home_class,
+            esc_url(home_url('/campaign')),
+            esc_attr(__('View all posts', 'textdomain')),
+            esc_html('ALL')
+          );
+          echo sprintf(esc_html__('%s', 'textdomain'), $home_link);
+
+          // タクソノミーのリンク
+          $taxonomy = 'diving_category';
+          $current_term_id = get_queried_object_id();
+          $terms = get_terms(array(
+            'taxonomy' => $taxonomy,
+            'orderby' => 'ID',
+            'order'   => 'ASC',
+            'number'  => 5
+          ));
+          if ($terms) {
+            foreach ($terms as $term) {
+              $term_class = ($current_term_id === $term->term_id) ? 'is-active' : '';
+              $term_link = sprintf(
+                '<li class="categories__item %s"><a href="%s" class="categories__link" title="%s">%s</a></li>',
+                $term_class,
+                esc_url(get_category_link($term->term_id)),
+                esc_attr(sprintf(__('View posts in %s', 'textdomain'), $term->name)),
+                esc_html($term->name)
+              );
+              echo sprintf(esc_html__('%s', 'textdomain'), $term_link);
+            }
+          }
+          ?>
         </ul>
       </div>
 

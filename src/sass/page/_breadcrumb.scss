@@ -9,7 +9,7 @@
 .breadcrumb__container {
   display: flex;
   align-items: baseline;
-  gap: rem(5);
+  gap: rem(7);
   color: $cGreen01;
   font-size: rem(14);
   line-height: 1;
@@ -31,7 +31,7 @@
 
 .breadcrumb__separator {
   display: inline-block;
-  transform: rotate(45deg);
+  transform: translateY(rem(2)) rotate(45deg);
   transform-origin: right top;
   width: rem(6);
   height: rem(6);
