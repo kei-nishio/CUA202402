@@ -1,5 +1,1 @@
-<?php get_header(); ?>
-<main>
-  single(blog)
-</main>
-<?php get_footer(); ?>
+<?php get_template_part("/parts/common/p-2column-blog");
