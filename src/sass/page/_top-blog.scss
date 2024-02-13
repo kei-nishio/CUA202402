@@ -1,13 +1,13 @@
 @use "global" as *;
 
-.blog {
+.top-blog {
   padding-top: rem(80);
   @include mq {
     position: relative;
     padding-top: rem(100);
   }
 }
-.blog::before {
+.top-blog::before {
   @include mq {
     content: "";
     position: absolute;
@@ -23,10 +23,10 @@
     background-size: cover;
   }
 }
-.blog__inner{
+.top-blog__inner {
   max-width: rem(560);
 }
-.blog__cards {
+.top-blog__cards {
   margin-top: rem(24);
   margin-right: auto;
   margin-left: auto;
@@ -36,10 +36,9 @@
   @include mq {
     margin-top: rem(76);
     padding: 0;
-
   }
 }
-.blog__button {
+.top-blog__button {
   margin-top: rem(40);
   text-align: center;
   @include mq {

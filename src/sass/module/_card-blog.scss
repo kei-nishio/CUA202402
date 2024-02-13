@@ -5,6 +5,7 @@
   width: 100%;
   box-shadow: rem(2) rem(2) rem(10) 0 rgba($black, 0.25);
   background: $white;
+  height: 100%;
 
   @include mq {
     &:hover .card-blog__image img {

@@ -133,6 +133,11 @@
                   $thumbnail_id = get_post_thumbnail_id($post_id); // アイキャッチ画像の ID を取得
                   $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
                   ?>
+                  <?php
+                  // カスタムフィールドの金額を取得
+                  $price_before = number_format(get_field('acf_parice_before'));
+                  $price_after = number_format(get_field('acf_parice_after'));
+                  ?>
                   <li class="swiper-slide">
                     <div class="campaign__card card-campaign">
                       <a href="./campaign.html" class="card-campaign__link">
@@ -156,19 +161,9 @@
                         </div>
                         <div class="card-campaign__content">
                           <p class="card-campaign__text">全部コミコミ&#040;お一人様&#041;</p>
-
                           <div class="card-campaign__prices">
-                            <?php
-                            // カスタムフィールドの金額を取得
-                            $price_before = number_format(get_field('acf_parice_before'));
-                            $price_after = number_format(get_field('acf_parice_after'));
-                            ?>
-                            <span class="card-campaign__price-before">
-                              <?php echo esc_html('¥' . $price_before); ?>
-                            </span>
-                            <span class="card-campaign__price-after">
-                              <?php echo esc_html('¥' . $price_after); ?>
-                            </span>
+                            <span class="card-campaign__price-before"><?php echo esc_html('¥' . $price_before); ?></span>
+                            <span class="card-campaign__price-after"><?php echo esc_html('¥' . $price_after); ?></span>
                           </div>
                         </div>
                       </a>
@@ -278,13 +273,13 @@
   </section>
 
   <!-- Blog -->
-  <section id="blog" class="blog treatment">
-    <div class="blog__inner inner">
-      <div class="blog__title section-title section-title--white-pc">
+  <section id="blog" class="top-blog treatment">
+    <div class="top-blog__inner inner">
+      <div class="top-blog__title section-title section-title--white-pc">
         <div class="section-title__en">blog</div>
         <h2 class="section-title__ja">ブログ</h2>
       </div>
-      <ul class="blog__cards cards01 cards01--c3">
+      <ul class="top-blog__cards cards01 cards01--c3">
         <?php
         $args = array(
           "post_type" => "post", //post通常投稿
@@ -296,32 +291,8 @@
         ?>
         <?php if ($the_query->have_posts()) : ?>
           <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-            <?php
-            $post_id = get_the_ID(); // 投稿の ID を指定
-            $thumbnail_id = get_post_thumbnail_id($post_id); // アイキャッチ画像の ID を取得
-            $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
-            ?>
             <li class="cards01__card">
-              <div class="card-blog">
-                <a href="<?php the_permalink(); ?>" class="card-blog__link">
-                  <figure class="card-blog__image">
-                    <?php if (has_post_thumbnail()) : ?>
-                      <img src="<?php the_post_thumbnail_url("full"); ?>" alt="<?php echo esc_attr($alt); ?>">
-                    <?php else : ?>
-                      <img src="<?php echo esc_url(get_theme_file_uri("/assets/images/common/noimage.jpg")); ?>" alt="ノーイメージ画像" />
-                    <?php endif; ?>
-                  </figure>
-                  <div class="card-blog__body">
-                    <time class="card-blog__date" datetime="<?php the_time("c"); ?>"><?php the_time("Y.m/d"); ?></time>
-                    <h3 class="card-blog__title"><?php the_title(); ?></h3>
-                    <div class="card-blog__content">
-                      <p class="card-blog__text">
-                        <?php echo esc_html(mb_strimwidth(strip_tags(get_the_content()), 0, 100 * 2, '')); ?>
-                      </p>
-                    </div>
-                  </div>
-                </a>
-              </div>
+              <?php get_template_part("/parts/card/p-card-blog") ?>
             </li>
           <?php endwhile; ?>
           <?php wp_reset_postdata(); ?>
@@ -329,7 +300,7 @@
           <li>記事が投稿されていません</li>
         <?php endif; ?>
       </ul>
-      <div class="blog__button">
+      <div class="top-blog__button">
         <a href="./blog.html" class="button">
           <p>view more</p>
           <div class="button__arrow arrow"></div>
@@ -396,8 +367,7 @@
                     <div class="card-voice__flex">
                       <div class="card-voice__heading">
                         <div class="card-voice__meta">
-                          <p class="card-voice__information">
-                            <?php echo $age_gender; ?></p>
+                          <p class="card-voice__information"><?php echo $age_gender; ?></p>
                           <span class="card-voice__category category-diving"><?php echo $customer_category; ?></span>
                         </div>
                         <h3 class="card-voice__title"><?php the_title(); ?></h3>

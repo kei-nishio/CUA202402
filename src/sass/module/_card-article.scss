@@ -12,6 +12,13 @@
   padding: rem(16);
   display: flex;
   gap: rem(16);
+  transition: opacity 0.3s;
+
+  &:hover {
+    @include mq {
+      opacity: 0.8;
+    }
+  }
 }
 
 .card-article__image {
