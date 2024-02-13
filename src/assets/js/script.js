@@ -223,7 +223,7 @@ jQuery(function ($) {
     $(this).addClass("is-active");
     categoryContent.eq(index).addClass("is-active");
   });
-  
+
   // * target-id付リンクを踏んだ時にリンク先のInformation記事を切り替える
   $(function () {
     let linkId = new URL(window.location.href).searchParams.get("id");
@@ -240,9 +240,13 @@ jQuery(function ($) {
   });
 
   // * アーカイブ年をクリックしたときにアコーディオンする
-  const archiveButtonActive = $(".js-archive-button.is-active");
+  // 初期表示
   const archiveButton = $(".js-archive-button");
+  archiveButton.eq(0).addClass("is-active");
+  // 初期表示　is-activeの次の要素を表示する
+  const archiveButtonActive = $(".js-archive-button.is-active");
   archiveButtonActive.next().css({ display: "block" });
+  // ボタンをクリックしたらアコーディオンする
   archiveButton.on("click", function () {
     $(this).toggleClass("is-active");
     $(this).next().slideToggle(300);

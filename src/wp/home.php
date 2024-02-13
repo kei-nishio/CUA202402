@@ -255,7 +255,7 @@
               // 各年ごとに<ul>リストを作成して出力
               foreach ($archives_by_year as $year => $months) {
                 echo '<li class="sidebar__archive-list">';
-                echo '<span class="sidebar__archive-year js-archive-button is-active">' . esc_html($year) . '</span>';
+                echo '<span class="sidebar__archive-year js-archive-button">' . esc_html($year) . '</span>';
                 echo '<ul class="sidebar__archive-months">';
                 echo implode('', $months);
                 echo '</ul>';
