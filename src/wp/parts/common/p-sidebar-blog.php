@@ -7,8 +7,6 @@
       </div>
       <h2 class="sidebar__title-text">人気記事</h2>
     </div>
-
-
     <?php
     $args = array(
       "post_type" => "post", //post通常投稿
@@ -27,7 +25,7 @@
           $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
           ?>
           <li class="sidebar__popular-article-card card-article">
-            <a href="#" class="card-article__link">
+            <a href="<?php the_permalink(); ?>" class="card-article__link">
               <figure class="card-article__image">
                 <?php if (has_post_thumbnail()) : ?>
                   <img src="<?php the_post_thumbnail_url("full"); ?>" alt="<?php echo esc_attr($alt); ?>">

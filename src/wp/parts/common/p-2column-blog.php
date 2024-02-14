@@ -26,12 +26,12 @@
         <!-- Left side -->
         <div class="page-blog__left-side">
           <?php
-          if (is_home()) {
-            get_template_part("/parts/common/p-archive-blog");
-          } elseif (is_single()) {
+          if (is_single()) {
+            // シングルページの場合
             get_template_part("/parts/common/p-single-blog");
           } else {
-            echo "ページが見つかりません";
+            // アーカイブページの場合
+            get_template_part("/parts/common/p-archive-blog");
           }
           ?>
         </div>

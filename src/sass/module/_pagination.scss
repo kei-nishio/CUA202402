@@ -20,12 +20,13 @@
   line-height: 1;
   font-family: $second-font-family;
   transition: opacity 0.3s, background-color 0.3s, color 0.3s;
-  &:hover {
-    opacity: 0.95;
-    background-color: $cGreenAccent;
-    color: $white;
-    cursor: pointer;
-  }
+}
+.pagination__prev:hover,
+.pagination__next:hover {
+  opacity: 0.95;
+  background-color: $cGreenAccent;
+  color: $white;
+  cursor: pointer;
 }
 .pagination__prev {
   margin-right: rem(35);
@@ -46,7 +47,12 @@
   height: 30%;
   border-top: 1px solid $cGreenAccent;
   border-right: 1px solid $cGreenAccent;
-  transition: border-color 0.3s;
+  transition: opacity 0.3s, border-color 0.3s;
+}
+.pagination__prev:hover span,
+.pagination__next:hover span {
+  opacity: 0.95;
+  border-color: $white;
 }
 .pagination__prev span {
   transform: translate(-25%, -50%) rotate(-135deg);
