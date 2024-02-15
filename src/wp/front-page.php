@@ -247,12 +247,20 @@
           </figure>
         </div>
         <div class="information__text-box">
-          <h3 class="information__sub-title">ライセンス講習</h3>
-          <p class="information__text">
-            当店はダイビングライセンス（Cカード）世界最大の教育機関PADIの「正規店」として店舗登録されています。
-            <br />
-            正規登録店として、安心安全に初めての方でも安心安全にライセンス取得をサポート致します。
-          </p>
+          <?php
+          $taxonomy = 'campaign_category';
+          $number = 0; // 0なら全件取得
+          $terms = get_terms(array(
+            'taxonomy' => $taxonomy,
+            'orderby' => 'rand',
+            'number'  => $number
+          ));
+          $term = $terms[0];
+          $term_name = $term->name;
+          $term_description = $term->description;
+          ?>
+          <h3 class="information__sub-title"><?php echo esc_html($term_name); ?></h3>
+          <p class="information__text"><?php echo esc_html($term_description); ?></p>
           <div class="information__button">
             <a href="./information.html" class="button">
               <p>view more</p>
