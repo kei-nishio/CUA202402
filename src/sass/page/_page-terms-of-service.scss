@@ -2,6 +2,7 @@
 
 .page-terms-of-service__inner.inner {
   max-width: rem(560);
+
   @include mq {
     max-width: rem(850);
   }
@@ -15,13 +16,13 @@
     font-size: rem(32);
   }
 }
-.page-terms-of-service__text {
+.page-terms-of-service__body {
   margin-top: rem(40);
   color: $cGreen01;
   line-height: 2;
-
   & > p:nth-of-type(n + 3),
-  & > ul {
+  & > ul,
+  & > ol {
     margin-top: 2em;
   }
   & li {
