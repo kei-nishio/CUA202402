@@ -225,19 +225,17 @@ jQuery(function ($) {
   });
 
   // * target-id付リンクを踏んだ時にリンク先のInformation記事を切り替える
-  $(function () {
-    let linkId = new URL(window.location.href).searchParams.get("id");
-    if (linkId) {
-      // console.log(new URL(window.location.href))
-      // console.log(linkId)
-      categoryButton.removeClass("is-active");
-      categoryContent.removeClass("is-active");
-      let button = $("[data-target='" + linkId + "']");
-      let content = $("#" + linkId);
-      button.addClass("is-active");
-      content.addClass("is-active");
-    }
-  });
+  let linkId = new URL(window.location.href).searchParams.get("id");
+  if (linkId) {
+    // console.log(new URL(window.location.href))
+    // console.log(linkId)
+    categoryButton.removeClass("is-active");
+    categoryContent.removeClass("is-active");
+    let button = $("[data-target='" + linkId + "']");
+    let content = $("#" + linkId);
+    button.addClass("is-active");
+    content.addClass("is-active");
+  }
 
   // * アーカイブ年をクリックしたときにアコーディオンする
   // 初期表示
@@ -260,6 +258,14 @@ jQuery(function ($) {
   faqQuestion.on("click", function () {
     $(this).toggleClass("is-open");
     $(this).next().slideToggle(300);
+  });
+
+  // * フォームのバリデーション
+  $(document).on("wpcf7invalid", function (event) {
+    $(".js-form-error").addClass("is-active");
+    window.scrollTo({
+      top: $(".js-form-error").offset().top - headerHeightDefault,
+    });
   });
 
   // * END

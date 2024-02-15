@@ -10,11 +10,11 @@
   border-bottom: 1px dashed $cGreenAccent;
 
   @include mq {
-    padding-bottom: rem(37);
-    padding-top: rem(40);
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    padding-bottom: rem(37);
+    padding-top: rem(40);
   }
 }
 .form__item:first-child {
@@ -37,17 +37,17 @@
 }
 .form__required {
   margin-left: rem(4);
+  padding-bottom: rem(1);
   padding-left: rem(16);
   padding-right: rem(12);
   padding-top: rem(2);
-  padding-bottom: rem(1);
   background-color: $cRed;
   color: $white;
   font-weight: $normal;
   font-size: rem(12);
   letter-spacing: 0.4em;
 }
-.form__checkbox {
+.form__checkbox #f-checkbox {
   display: flex;
   flex-direction: column;
   gap: rem(1);
@@ -61,6 +61,7 @@
   padding-left: rem(32);
   padding-right: rem(32);
   border: none;
+
   @include mq {
     margin-top: rem(80);
   }
@@ -68,6 +69,7 @@
     padding-left: rem(24);
     font-size: rem(14);
     line-height: calc(22 / 14);
+
     @include mq {
       padding-left: rem(32);
     }
@@ -86,36 +88,6 @@
   justify-content: center;
   align-items: center;
   margin-top: rem(40);
-}
-
-// ! === Form Error  ===
-.form__error {
-  display: none;
-  margin-inline: auto;
-  width: 100%;
-  color: $cRed;
-  font-size: rem(14);
-  justify-content: center;
-  align-items: center;
-}
-.form.is-error {
-  & .form__error {
-    display: flex;
-  }
-  & .form__item:first-child {
-    padding-top: rem(37);
-  }
-  & input:required,
-  & select:required,
-  & textarea:required {
-    border: 1px solid $cRed;
-    background: rgba(201, 72, 0, 0.2);
-  }
-  & input::placeholder,
-  & select::placeholder,
-  & textarea::placeholder {
-    color: $white;
-  }
 }
 
 // ! === Form Common Style ===
@@ -186,6 +158,7 @@ textarea {
   // margin-top: rem(10);
   font-size: $fz;
   font-family: inherit;
+
   /*↓↓↓↓不要ならコメントアウト or 削除 */
   // &:hover {  //ホバーしたときの色
   // 	border: 1px solid $border-cr;
@@ -361,11 +334,8 @@ select {
 
 [type="date"] {
   position: relative;
-
   /*↓デフォルトのアイコンを消す場合はコメントアウト（noneにする）*/
-
   appearance: auto;
-
   /*↓デフォルトではないアイコンを使う場合は入力する*/
   // background-image: url();
   // background-position: right 12px center;
@@ -392,4 +362,33 @@ input::placeholder,
 select::placeholder,
 textarea::placeholder {
   color: $cGreen02;
+}
+
+// ! === Form Error  ===
+.form__error {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-inline: auto;
+  padding-bottom: rem(37);
+  color: $cRed;
+  font-size: rem(14);
+  &.is-active {
+    display: flex;
+  }
+}
+.form .wpcf7-not-valid:not(span) {
+  border: 1px solid $cRed;
+  background: rgba(201, 72, 0, 0.2);
+  &::placeholder {
+    color: $white;
+  }
+}
+.form .wpcf7-not-valid:is(span) span::before {
+  border: 1px solid $cRed;
+  background: rgba(201, 72, 0, 0.2);
+  &::placeholder {
+    color: $white;
+  }
 }
