@@ -4,7 +4,7 @@ add_action('admin_menu', 'my_custom_menu');
 function my_custom_menu()
 {
   // カスタムカテゴリーのデータを取得
-  $categories = get_categories(array('taxonomy' => 'diving_category'));
+  $categories = get_categories(array('taxonomy' => 'hoge_category'));
   $parent_slug = 'manage_options'; // 親メニューのスラッグ
 
   // トップレベルメニューを追加

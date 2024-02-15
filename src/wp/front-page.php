@@ -143,7 +143,7 @@
                         <div class="card-campaign__meta">
                           <?php
                           // タクソノミーを表示
-                          $taxonomy = 'diving_category';
+                          $taxonomy = 'campaign_category';
                           $terms = get_the_terms($post_id, $taxonomy);
                           if (!is_wp_error($terms) && !empty($terms)) :
                           ?>
@@ -328,14 +328,15 @@
             $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
             ?>
             <?php
+            $taxonomy = 'voice_category';
+            $terms = get_the_terms($post_id, $taxonomy);
+            $term = $terms[0]->name;
             // カスタムフィールドの値を取得
             $age_gender = esc_html(get_field('acf_age_gender'));
-            $customer_category_id = get_field('acf_diving_category');
             $image = get_field('acf_customer_image');
             $customer_voice = esc_html(get_field('acf_customer_voice'));
             // タクソノミーと画像URLの取得
-            $taxonomy = 'diving_category';
-            $customer_category = esc_html(get_term($customer_category_id, $taxonomy)->name);
+            $customer_category = esc_html($term);
             $image_url = esc_url($image['url']);
             $image_alt = esc_attr($image['alt']);
             ?>

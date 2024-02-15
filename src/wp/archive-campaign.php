@@ -27,7 +27,7 @@
         <ul class="categories__items">
           <?php
           // カスタム投稿一覧ページのリンク
-          $home_class = (is_post_type_archive()) ? 'is-active' : '';
+          $home_class = (is_post_type_archive('campaign')) ? 'is-active' : '';
           $home_link = sprintf(
             '<li class="categories__item %s"><a href="%s" class="categories__link" title="%s">%s</a></li>',
             $home_class,
@@ -38,7 +38,7 @@
           echo sprintf(esc_html__('%s', 'textdomain'), $home_link);
 
           // タクソノミーのリンク
-          $taxonomy = 'diving_category';
+          $taxonomy = 'campaign_category';
           $current_term_id = get_queried_object_id();
           $terms = get_terms(array(
             'taxonomy' => $taxonomy,
@@ -52,7 +52,8 @@
               $term_link = sprintf(
                 '<li class="categories__item %s"><a href="%s" class="categories__link" title="%s">%s</a></li>',
                 $term_class,
-                esc_url(get_category_link($term->term_id)),
+                // esc_url(get_category_link($term->term_id)), // カテゴリーページの場合
+                esc_url(get_term_link($term, $taxonomy)), // タクソノミーページの場合
                 esc_attr(sprintf(__('View posts in %s', 'textdomain'), $term->name)),
                 esc_html($term->name)
               );
@@ -85,7 +86,7 @@
                   <div class="card-campaign__meta">
                     <?php
                     // タクソノミーを表示
-                    $taxonomy = 'diving_category';
+                    $taxonomy = 'campaign';
                     $terms = get_the_terms($post_id, $taxonomy);
                     if (!is_wp_error($terms) && !empty($terms)) :
                     ?>

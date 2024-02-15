@@ -24,7 +24,7 @@
     <div class="page-information__inner inner">
       <div class="page-information__body">
         <?php
-        $taxonomy = 'diving_category';
+        $taxonomy = 'campaign_category';
         $number = 0; // 0なら全件取得
         $terms = get_terms(array(
           'taxonomy' => $taxonomy,
