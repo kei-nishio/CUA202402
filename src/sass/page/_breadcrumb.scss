@@ -15,6 +15,15 @@
   line-height: 1;
   font-family: $second-font-family;
 }
+.breadcrumb__separator {
+  display: inline-block;
+  transform: translateY(rem(2)) rotate(45deg);
+  transform-origin: right top;
+  width: rem(6);
+  height: rem(6);
+  border-top: 1px solid $cGreen01;
+  border-right: 1px solid $cGreen01;
+}
 
 .breadcrumb.breadcrumb--404 {
   margin-top: initial;
@@ -27,14 +36,7 @@
   & .breadcrumb__container {
     color: $white;
   }
-}
-
-.breadcrumb__separator {
-  display: inline-block;
-  transform: translateY(rem(2)) rotate(45deg);
-  transform-origin: right top;
-  width: rem(6);
-  height: rem(6);
-  border-top: 1px solid $cGreen01;
-  border-right: 1px solid $cGreen01;
+  & .breadcrumb__separator {
+    border-color: $white;
+  }
 }

@@ -1,5 +1,12 @@
 <!-- Footer -->
-<footer class="footer">
+<?php
+if (is_404()) {
+  $class = 'footer footer--404';
+} else {
+  $class = 'footer';
+}
+?>
+<footer class="<?php echo esc_attr($class); ?>">
   <div class="footer__inner inner">
     <div class="footer__body">
       <div class="footer__logo-container">
