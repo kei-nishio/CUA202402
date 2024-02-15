@@ -66,180 +66,51 @@
 
       <!-- Cards -->
       <ul class="page-voice__cards cards02 cards02--c2">
-        <li class="cards02__card">
-          <div class="card-voice">
-            <a href="./voice.html" class="card-voice__link">
-              <div class="card-voice__body">
-                <div class="card-voice__flex">
-                  <div class="card-voice__heading">
-                    <div class="card-voice__meta">
-                      <p class="card-voice__information">20代&#040;女性&#041;</p>
-                      <span class="card-voice__category category-diving">ライセンス講習</span>
+        <?php if (have_posts()) : ?>
+          <?php while (have_posts()) : the_post(); ?>
+            <?php
+            $post_id = get_the_ID(); // 投稿の ID を指定
+            $thumbnail_id = get_post_thumbnail_id($post_id); // アイキャッチ画像の ID を取得
+            $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
+            ?>
+            <?php
+            $taxonomy = 'voice_category';
+            $terms = get_the_terms($post_id, $taxonomy);
+            $term = $terms[0]->name;
+            // カスタムフィールドの値を取得
+            $age_gender = esc_html(get_field('acf_age_gender'));
+            $image = get_field('acf_customer_image');
+            $customer_voice = esc_html(get_field('acf_customer_voice'));
+            // タクソノミーと画像URLの取得
+            $customer_category = esc_html($term);
+            $image_url = esc_url($image['url']);
+            $image_alt = esc_attr($image['alt']);
+            ?>
+            <li class="cards02__card">
+              <div class="card-voice">
+                <div class="card-voice__body">
+                  <div class="card-voice__flex">
+                    <div class="card-voice__heading">
+                      <div class="card-voice__meta">
+                        <p class="card-voice__information"><?php echo $age_gender; ?></p>
+                        <span class="card-voice__category category-diving"><?php echo $customer_category; ?></span>
+                      </div>
+                      <h3 class="card-voice__title"><?php the_title(); ?></h3>
                     </div>
-                    <h3 class="card-voice__title">ここにタイトルが入ります。ここにタイトル</h3>
+                    <figure class="card-voice__image js-colorbox">
+                      <img src="<?php echo $image_url ?>" alt="<?php echo $image_alt ?>" />
+                    </figure>
                   </div>
-                  <figure class="card-voice__image js-colorbox">
-                    <img src="./assets/images/voice-card/voice-card01.webp" alt="麦わら帽子と白いTシャツの笑顔の女性" />
-                  </figure>
-                </div>
-                <div class="card-voice__content">
-                  <p class="card-voice__text">
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。
-                  </p>
+                  <div class="card-voice__content">
+                    <p class="card-voice__text"><?php echo $customer_voice; ?></p>
+                  </div>
                 </div>
               </div>
-            </a>
-          </div>
-        </li>
-        <li class="cards02__card">
-          <div class="card-voice">
-            <a href="./voice.html" class="card-voice__link">
-              <div class="card-voice__body">
-                <div class="card-voice__flex">
-                  <div class="card-voice__heading">
-                    <div class="card-voice__meta">
-                      <p class="card-voice__information">30代&#040;男性&#041;</p>
-                      <span class="card-voice__category category-diving">ファンダイビング</span>
-                    </div>
-                    <h3 class="card-voice__title">ここにタイトルが入ります。ここにタイトル</h3>
-                  </div>
-                  <figure class="card-voice__image js-colorbox">
-                    <img src="./assets/images/voice-card/voice-card02.webp" alt="サムズアップした紺色Yシャツの男性" />
-                  </figure>
-                </div>
-                <div class="card-voice__content">
-                  <p class="card-voice__text">
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </li>
-        <li class="cards02__card">
-          <div class="card-voice">
-            <a href="./voice.html" class="card-voice__link">
-              <div class="card-voice__body">
-                <div class="card-voice__flex">
-                  <div class="card-voice__heading">
-                    <div class="card-voice__meta">
-                      <p class="card-voice__information">30代&#040;女性&#041;</p>
-                      <span class="card-voice__category category-diving">体験ダイビング</span>
-                    </div>
-                    <h3 class="card-voice__title">ここにタイトルが入ります。ここにタイトル</h3>
-                  </div>
-                  <figure class="card-voice__image js-colorbox">
-                    <img src="./assets/images/voice-card/voice-card03.webp" alt="仲の良さそうな二人のきれいな女性" />
-                  </figure>
-                </div>
-                <div class="card-voice__content">
-                  <p class="card-voice__text">
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </li>
-        <li class="cards02__card">
-          <div class="card-voice">
-            <a href="./voice.html" class="card-voice__link">
-              <div class="card-voice__body">
-                <div class="card-voice__flex">
-                  <div class="card-voice__heading">
-                    <div class="card-voice__meta">
-                      <p class="card-voice__information">20代&#040;女性&#041;</p>
-                      <span class="card-voice__category category-diving">体験ダイビング</span>
-                    </div>
-                    <h3 class="card-voice__title">ここにタイトルが入ります。ここにタイトル</h3>
-                  </div>
-                  <figure class="card-voice__image js-colorbox">
-                    <img src="./assets/images/voice-card/voice-card04.webp" alt="藤色の長袖を着て外にいる若い女性" />
-                  </figure>
-                </div>
-                <div class="card-voice__content">
-                  <p class="card-voice__text">
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </li>
-        <li class="cards02__card">
-          <div class="card-voice">
-            <a href="./voice.html" class="card-voice__link">
-              <div class="card-voice__body">
-                <div class="card-voice__flex">
-                  <div class="card-voice__heading">
-                    <div class="card-voice__meta">
-                      <p class="card-voice__information">30代&#040;カップル&#041;</p>
-                      <span class="card-voice__category category-diving">ファンダイビング</span>
-                    </div>
-                    <h3 class="card-voice__title">ここにタイトルが入ります。ここにタイトル</h3>
-                  </div>
-                  <figure class="card-voice__image js-colorbox">
-                    <img src="./assets/images/voice-card/voice-card05.webp" alt="黄色いソファに座る仲のいいカップルの様子" />
-                  </figure>
-                </div>
-                <div class="card-voice__content">
-                  <p class="card-voice__text">
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </li>
-        <li class="cards02__card">
-          <div class="card-voice">
-            <a href="./voice.html" class="card-voice__link">
-              <div class="card-voice__body">
-                <div class="card-voice__flex">
-                  <div class="card-voice__heading">
-                    <div class="card-voice__meta">
-                      <p class="card-voice__information">20代&#040;女性&#041;</p>
-                      <span class="card-voice__category category-diving">ライセンス講習</span>
-                    </div>
-                    <h3 class="card-voice__title">ここにタイトルが入ります。ここにタイトル</h3>
-                  </div>
-                  <figure class="card-voice__image js-colorbox">
-                    <img src="./assets/images/voice-card/voice-card06.webp" alt="ボーダー柄の服を着た若い女性" />
-                  </figure>
-                </div>
-                <div class="card-voice__content">
-                  <p class="card-voice__text">
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。
-                    <br />
-                    ここにテキストが入ります。ここにテキストが入ります。
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </li>
+            </li>
+          <?php endwhile; ?>
+        <?php else : ?>
+          <li>記事が投稿されていません</li>
+        <?php endif; ?>
       </ul>
 
       <!-- Pagination -->

@@ -340,30 +340,25 @@
             $image_url = esc_url($image['url']);
             $image_alt = esc_attr($image['alt']);
             ?>
-            <?php echo esc_attr($alt); ?>
             <li class="cards02__card">
               <div class="card-voice">
-                <a href="./voice.html" class="card-voice__link">
-                  <div class="card-voice__body">
-                    <div class="card-voice__flex">
-                      <div class="card-voice__heading">
-                        <div class="card-voice__meta">
-                          <p class="card-voice__information"><?php echo $age_gender; ?></p>
-                          <span class="card-voice__category category-diving"><?php echo $customer_category; ?></span>
-                        </div>
-                        <h3 class="card-voice__title"><?php the_title(); ?></h3>
+                <div class="card-voice__body">
+                  <div class="card-voice__flex">
+                    <div class="card-voice__heading">
+                      <div class="card-voice__meta">
+                        <p class="card-voice__information"><?php echo $age_gender; ?></p>
+                        <span class="card-voice__category category-diving"><?php echo $customer_category; ?></span>
                       </div>
-                      <figure class="card-voice__image js-colorbox">
-                        <img src="<?php echo $image_url ?>" alt="<?php echo $image_url ?>" />
-                      </figure>
+                      <h3 class="card-voice__title"><?php the_title(); ?></h3>
                     </div>
-                    <div class="card-voice__content">
-                      <p class="card-voice__text">
-                        <?php echo $customer_voice; ?>
-                      </p>
-                    </div>
+                    <figure class="card-voice__image js-colorbox">
+                      <img src="<?php echo $image_url ?>" alt="<?php echo $image_alt ?>" />
+                    </figure>
                   </div>
-                </a>
+                  <div class="card-voice__content">
+                    <p class="card-voice__text"><?php echo $customer_voice; ?></p>
+                  </div>
+                </div>
               </div>
             </li>
           <?php endwhile; ?>

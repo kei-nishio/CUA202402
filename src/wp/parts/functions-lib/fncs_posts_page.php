@@ -13,6 +13,6 @@ function change_posts_per_page($query)
 
   // カスタム投稿タイプ「voice」のアーカイブページでの表示件数を設定
   if ($query->is_post_type_archive('voice')) {
-    $query->set('posts_per_page', 1); // 表示件数を1に指定
+    $query->set('posts_per_page', 6); // 表示件数を1に指定
   }
 }
