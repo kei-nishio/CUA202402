@@ -11,4 +11,10 @@
  * @link https://2inc.org/blog/2016/06/06/5280/
  * @uses SCF::add_options_page('料金', '料金一覧', 'manage_options', 'price-options', 'dashicons-money-alt', '6');
  */
+
+//  ギャラリー
 SCF::add_options_page('ギャラリー', 'ギャラリー', 'manage_options', 'gallery-options', 'dashicons-format-gallery', '8');
+
+
+SCF::add_options_page('よくある質問', 'よくある質問', 'manage_options', 'faq-options', 'dashicons-list-view
+', '11');

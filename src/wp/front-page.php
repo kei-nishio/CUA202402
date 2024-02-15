@@ -418,12 +418,8 @@
                     $fields = SCF::get($category_group, $post_id);
                     foreach ($fields as $field) {
                     ?>
-                      <dt class="diving-products__name">
-                        <?php echo esc_html($field['scfdivingcategorycourse']); ?>
-                      </dt>
-                      <dd class="diving-products__price">
-                        <?php echo esc_html('¥' . number_format($field['scfdivingcategoryprice'])); ?>
-                      </dd>
+                      <dt class="diving-products__name"><?php echo esc_html($field['scfdivingcategorycourse']); ?></dt>
+                      <dd class="diving-products__price"><?php echo esc_html('¥' . number_format($field['scfdivingcategoryprice'])); ?></dd>
                     <?php } ?>
                   </dl>
                 </div>
