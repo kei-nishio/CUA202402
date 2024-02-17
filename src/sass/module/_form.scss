@@ -365,8 +365,10 @@ textarea::placeholder {
 }
 
 // ! === Form Error  ===
+// * エラーメッセージ
 .form__error {
   display: none;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -378,13 +380,19 @@ textarea::placeholder {
     display: flex;
   }
 }
+// テキストとテキストエリアとセレクトのエラー
 .form .wpcf7-not-valid:not(span) {
   border: 1px solid $cRed;
   background: rgba(201, 72, 0, 0.2);
+  color: $white;
   &::placeholder {
     color: $white;
   }
+  & option {
+    color: initial;
+  }
 }
+// チェックボックスのエラー
 .form .wpcf7-not-valid:is(span) span::before {
   border: 1px solid $cRed;
   background: rgba(201, 72, 0, 0.2);

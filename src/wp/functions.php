@@ -25,6 +25,9 @@ get_template_part("/parts/functions-lib/fncs_posts_page");
 // ! Contact Form 7で自動挿入されるPタグ、brタグを削除
 get_template_part("/parts/functions-lib/fncs_wpcf7_reset");
 
+// ! Contact Form 7でセレクトボックスをカスタマイズする
+get_template_part("/parts/functions-lib/fncs_wpcf7_custom_select");
+
 // ! 通常投稿タイプのラベルを変更する
 get_template_part("/parts/functions-lib/fncs_post_label_change");
 

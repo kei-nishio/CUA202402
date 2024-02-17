@@ -2,6 +2,8 @@
 <?php
 if (is_404()) {
   $class = 'footer footer--404';
+} elseif (is_page('contact-thank')) {
+  $class = 'footer footer--contact-thank';
 } else {
   $class = 'footer';
 }

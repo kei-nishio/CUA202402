@@ -19,16 +19,24 @@
   <!-- Breadcrumb -->
   <?php get_template_part("/parts/common/p-breadcrumb"); ?>
 
-  <!-- Price -->
-  <div class="page-contact page-top treatment">
-    <div class="page-contact__inner inner">
-      <!-- Forms -->
-      <div class="page-contact__form">
-        <!-- error message -->
-        <div class="form__error js-form-error">
-          <div>※必須項目が入力されていません。<span class="u-mobile"><br />&emsp;</span>入力してください。</div>
-        </div>
-        <?php the_content(); ?>
+  <!-- Thanks -->
+  <div class="page-thanks page-top treatment">
+    <div class="page-thanks__inner inner">
+      <div class="page-thanks__body">
+        <p class="page-thanks__title">お問い合わせ内容を送信完了しました。</p>
+        <p class="page-thanks__text">
+          このたびは、お問い合わせ頂き
+          <br class="u-mobile" />
+          誠にありがとうございます。
+          <br />
+          お送り頂きました内容を確認の上、
+          <br class="u-mobile" />
+          3営業日以内に折り返しご連絡させて頂きます。
+          <br />
+          また、ご記入頂いたメールアドレスへ、
+          <br class="u-mobile" />
+          自動返信の確認メールをお送りしております。
+        </p>
       </div>
     </div>
   </div>
