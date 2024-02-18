@@ -29,13 +29,12 @@
   <li class="navigation__item">
     <a href="<?php echo esc_url(home_url('/information')); ?>">ダイビング情報</a>
     <?php
-    $taxonomy = 'campaign_category';
-    $number = 0; // 0なら全件取得
+    $taxonomy = 'information_category';
     $terms = get_terms(array(
       'taxonomy' => $taxonomy,
       'orderby' => 'ID',
       'order'   => 'ASC',
-      'number'  => $number
+      'number'  => 0, // 0なら全件取得
     ));
     ?>
     <ul class="navigation__sub-items">

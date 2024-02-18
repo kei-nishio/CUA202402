@@ -248,12 +248,11 @@
         </div>
         <div class="information__text-box">
           <?php
-          $taxonomy = 'campaign_category';
-          $number = 0; // 0なら全件取得
+          $taxonomy = 'information_category';
           $terms = get_terms(array(
             'taxonomy' => $taxonomy,
             'orderby' => 'rand',
-            'number'  => $number
+            'number'  => 0, // 0なら全件取得
           ));
           $term = $terms[0];
           $term_name = $term->name;

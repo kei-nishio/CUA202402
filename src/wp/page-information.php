@@ -24,13 +24,12 @@
     <div class="page-information__inner inner">
       <div class="page-information__body">
         <?php
-        $taxonomy = 'campaign_category';
-        $number = 0; // 0なら全件取得
+        $taxonomy = 'information_category';
         $terms = get_terms(array(
           'taxonomy' => $taxonomy,
           'orderby' => 'ID',
           'order'   => 'ASC',
-          'number'  => $number
+          'number'  => 0 // 0なら全件取得
         ));
         ?>
         <!-- Categories -->
