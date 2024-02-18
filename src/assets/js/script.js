@@ -1,6 +1,6 @@
 jQuery(function ($) {
   // ! 「jQuery(function ($) {}」内であればWordpressでも「$」が使用可能になる
-  // console.log()
+  // console.log("start script.js");
 
   // ! function  // function myFunction(arg1, arg2) {}
   // * ヘッダー高さ分を考慮した遷移
@@ -34,7 +34,7 @@ jQuery(function ($) {
   $("a").on("click", function () {
     let targetHref = $(this).attr("href");
     if (targetHref && targetHref.startsWith("#")) {
-      // リンク先が#で始まる場合
+      // console.log("targetHref: " + targetHref);
       let linkAnchor = targetHref.substring(1); // #以下を変数として抜き出す
       fncHeaderDown(linkAnchor, 100, "linear", 1.1);
     }
@@ -45,6 +45,7 @@ jQuery(function ($) {
   $(window).on("load", function () {
     let targetHref = window.location.href;
     if (targetHref && targetHref.includes("#")) {
+      // console.log("targetHref: " + targetHref);
       let linkAnchor = window.location.href.split("#")[1];
       fncHeaderDown(linkAnchor, 100, "linear", 1.1);
     }
@@ -53,46 +54,51 @@ jQuery(function ($) {
   // ! 個別動作
 
   // * loading
-  const loadingTop = $(".js-load");
-  const loadingLeft = $(".js-loading-left");
-  const loadingRight = $(".js-loading-right");
-  if (!sessionStorage.getItem("visited")) {
-    $("body").css({ "overflow-y": "scroll", position: "fixed" });
-    loadingTop.show();
-    loadingLeft.css({ top: "100%" });
-    loadingRight.css({ top: "calc(100% + 80px)", right: "-20%" });
-    const loadingStartTime = 1000;
-    const imageAnimationTime = 1500;
-    const loadingFadeOutTime = 750;
+  if (window.location.pathname === "/") {
+    const loadingTop = $(".js-load");
+    const loadingLeft = $(".js-loading-left");
+    const loadingRight = $(".js-loading-right");
+    if (!sessionStorage.getItem("visited")) {
+      // console.log("loading");
+      $("body").css({ "overflow-y": "scroll", position: "fixed" });
+      loadingTop.show();
+      loadingLeft.css({ top: "100%" });
+      loadingRight.css({ top: "calc(100% + 80px)", right: "-20%" });
 
-    wait(loadingStartTime)
-      .then(function () {
-        loadingLeft.animate(
-          {
-            top: 0,
-          },
-          imageAnimationTime
-        );
-        loadingRight.animate(
-          {
-            top: 0,
-            right: 0,
-          },
-          imageAnimationTime
-        );
+      const loadingStartTime = 1000;
+      const imageAnimationTime = 1500;
+      const loadingFadeOutTime = 750;
 
-        return wait(imageAnimationTime);
-      })
-      .then(function () {
-        loadingTop.fadeOut(loadingFadeOutTime);
-        $("body").css({ "overflow-y": "", position: "" });
-      });
+      wait(loadingStartTime)
+        .then(function () {
+          loadingLeft.animate(
+            {
+              top: 0,
+            },
+            imageAnimationTime
+          );
+          loadingRight.animate(
+            {
+              top: 0,
+              right: 0,
+            },
+            imageAnimationTime
+          );
 
-    sessionStorage.setItem("visited", "true");
+          return wait(imageAnimationTime);
+        })
+        .then(function () {
+          loadingTop.fadeOut(loadingFadeOutTime);
+          $("body").css({ "overflow-y": "", position: "" });
+        });
+
+      sessionStorage.setItem("visited", "true");
+    }
   }
 
   // * hamburger and drawer
   $(".js-hamburger , .js-drawer-menu").click(function () {
+    // console.log("hamburger");
     $(".js-hamburger").toggleClass("is-active");
     $(".js-drawer-menu").fadeToggle();
 
@@ -186,6 +192,7 @@ jQuery(function ($) {
   // 768px以上で開くボタンをクリックしたらモーダルを表示する
   open.on("click", function () {
     if (windowWidth >= specifiedWidth) {
+      // console.log("open modal");
       let imageSrc = $(this).children("img").attr("src");
       let imageAlt = $(this).children("img").attr("alt");
       let newImg = $("<img>", {
@@ -201,6 +208,7 @@ jQuery(function ($) {
   });
   // 閉じるボタンをクリックしたらモーダルを閉じる
   close.add(modal).on("click", function () {
+    // console.log("close modal");
     modal.fadeOut(500, function () {
       $(".js-modal-img").remove();
       $("body").css({ overflow: "" });
@@ -215,6 +223,7 @@ jQuery(function ($) {
   categoryContent.eq(0).addClass("is-active");
   // ボタンをクリックしたらactiveにする
   categoryButton.on("click", function () {
+    // console.log("categoryButton");
     let index = categoryButton.index(this);
     categoryButton.removeClass("is-active");
     categoryContent.removeClass("is-active");
@@ -225,8 +234,8 @@ jQuery(function ($) {
   // * target-id付リンクを踏んだ時にリンク先のInformation記事を切り替える
   let linkId = new URL(window.location.href).searchParams.get("id");
   if (linkId) {
-    // console.log(new URL(window.location.href))
-    // console.log(linkId)
+    // console.log(new URL(window.location.href));
+    // console.log(linkId);
     categoryButton.removeClass("is-active");
     categoryContent.removeClass("is-active");
     let button = $("[data-target='" + linkId + "']");
@@ -258,17 +267,15 @@ jQuery(function ($) {
     $(this).next().slideToggle(300);
   });
 
-  // * フォームのバリデーション
-  $(document).on("wpcf7invalid", function (event) {
-    $(".js-form-error").addClass("is-active");
-    window.scrollTo({
-      top: $(".js-form-error").offset().top - headerHeightDefault,
-    });
-  });
-
-  // * END
-
   // ! 今回は利用しない
+
+  // * cf7フォームのバリデーション
+  // $(document).on("wpcf7invalid", function (event) {
+  //   $(".js-form-error").addClass("is-active");
+  //   window.scrollTo({
+  //     top: $(".js-form-error").offset().top - headerHeightDefault,
+  //   });
+  // });
 
   // * ナビゲーションクリック時にスーッと移動する
   // const headerHeight = $(".js-header").height();
