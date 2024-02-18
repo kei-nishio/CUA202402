@@ -309,7 +309,6 @@
         <div class="section-title__en">voice</div>
         <h2 class="section-title__ja">お客様の声</h2>
       </div>
-
       <?php
       $args = array(
         "post_type" => "voice", //post通常投稿
@@ -321,9 +320,8 @@
       ?>
       <ul class="voice__cards cards02 cards02--c2">
         <?php if ($the_query->have_posts()) : ?>
-          <?php $i = 0 ?>
           <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-            <?php get_template_part('/parts/card/p-card-voice.php') ?>
+            <?php get_template_part('/parts/card/p-card-voice') ?>
           <?php endwhile; ?>
           <?php wp_reset_postdata(); ?>
         <?php else : ?>
@@ -367,10 +365,12 @@
                 <?php
                 // タイトルがある場合のみ処理を続行する
                 $post_id = get_the_ID();
-                $category_group = 'scf_diving_category_group';
-                $result_not_empty = check_fields_not_empty($post_id, $category_group);
-                $result_numeric = check_fields_numeric($post_id, $category_group, 'scfdivingcategoryprice');
-                $fields = SCF::get($category_group, $post_id);
+                $field_group = 'scf_diving_category_group';
+                $field_course = 'scfdivingcategorycourse';
+                $field_price = 'scfdivingcategoryprice';
+                $result_not_empty = check_fields_not_empty($post_id, $field_group);
+                $result_numeric = check_fields_numeric($post_id, $field_group, $field_price);
+                $fields = SCF::get($field_group, $post_id);
                 // フィールド値に空白がないかつ価格が半角数字の場合のみ処理を続行する
                 ?>
                 <?php if ($result_not_empty === false || $result_numeric === false) continue; ?>
@@ -379,8 +379,8 @@
                     <h3 class="diving-products__category"><?php the_title(); ?></h3>
                     <dl class="diving-products__list">
                       <?php foreach ($fields as $field) : ?>
-                        <dt class="diving-products__name"><?php echo esc_html($field['scfdivingcategorycourse']); ?></dt>
-                        <dd class="diving-products__price"><?php echo esc_html('¥' . number_format($field['scfdivingcategoryprice'])); ?></dd>
+                        <dt class="diving-products__name"><?php echo esc_html($field[$field_course]); ?></dt>
+                        <dd class="diving-products__price"><?php echo esc_html('¥' . number_format($field[$field_price])); ?></dd>
                       <?php endforeach; ?>
                     </dl>
                   </div>

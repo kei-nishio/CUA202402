@@ -40,10 +40,12 @@
               <?php
               // タイトルがある場合のみ処理を続行する
               $post_id = get_the_ID();
-              $category_group = 'scf_diving_category_group';
-              $result_not_empty = check_fields_not_empty($post_id, $category_group);
-              $result_numeric = check_fields_numeric($post_id, $category_group, 'scfdivingcategoryprice');
-              $fields = SCF::get($category_group, $post_id);
+              $field_group = 'scf_diving_category_group';
+              $field_course = 'scfdivingcategorycourse';
+              $field_price = 'scfdivingcategoryprice';
+              $result_not_empty = check_fields_not_empty($post_id, $field_group);
+              $result_numeric = check_fields_numeric($post_id, $field_group, $field_price);
+              $fields = SCF::get($field_group, $post_id);
               // フィールド値に空白がないかつ価格が半角数字の場合のみ処理を続行する
               ?>
               <?php if ($result_not_empty === false || $result_numeric === false) continue; ?>
@@ -57,8 +59,8 @@
                 <dl class="page-price__product-table">
                   <?php foreach ($fields as $field) : ?>
                     <?php
-                    $course = $field['scfdivingcategorycourse'];
-                    $price = $field['scfdivingcategoryprice'];
+                    $course = $field[$field_course];
+                    $price = $field[$field_price];
                     ?>
                     <?php if ($course && $price) : ?>
                       <dt class="page-price__product-name"><?php echo esc_html($course); ?></dt>
