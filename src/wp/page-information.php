@@ -39,7 +39,7 @@
             if ($terms) {
               foreach ($terms as $term) {
                 $term_id = $term->term_id;
-                $term_name = $term->name;
+                $term_name = str_replace('|', '<br class="u-mobile" />', $term->name);
                 $term_slug = $term->slug;
                 // アイコンのファイル名
                 $term_icon = 'icon_' . $term_slug . '.png';
@@ -54,7 +54,7 @@
                   <div class="categories-with-whale__icon u-desktop">
                     <img src="<?php echo esc_url($term_icon_url); ?>" alt="魚のアイコン" />
                   </div>
-                  <?php echo esc_html($term_name); ?>
+                  <?php echo $term_name; ?>
                 </li>
             <?php
               }

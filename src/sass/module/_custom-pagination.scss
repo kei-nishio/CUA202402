@@ -1,0 +1,76 @@
+@use "global" as *;
+
+.custom-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: rem(12);
+  // 非表示処理ここから
+  .screen-reader-text {
+    display: none;
+  }
+  .prev + .page-numbers:has(+ .dots) {
+    display: none;
+  }
+  .page-numbers.dots {
+    display: none;
+  }
+  .page-numbers.dots + .page-numbers:has(+ .next) {
+    display: none;
+  }
+  // 非表示処理ここまで
+  .page-numbers {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: rem(38);
+    height: rem(38);
+    border: 1px solid $cGreenAccent;
+    background-color: $white;
+    color: $cGreenAccent;
+    font-weight: $bold;
+    font-size: rem(16);
+    line-height: 1;
+    font-family: $second-font-family;
+    transition: opacity 0.3s, background-color 0.3s, color 0.3s;
+
+    &.prev {
+      position: relative;
+      margin-right: rem(28);
+      background-color: initial;
+    }
+    &.next {
+      position: relative;
+      margin-left: rem(28);
+      background-color: initial;
+    }
+    &.prev span,
+    &.next span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: center;
+      width: 30%;
+      height: 30%;
+      border-top: 1px solid $cGreenAccent;
+      border-right: 1px solid $cGreenAccent;
+      transition: border-color 0.3s;
+    }
+    &.prev span {
+      transform: translate(-25%, -50%) rotate(-135deg);
+    }
+    &.next span {
+      transform: translate(-75%, -50%) rotate(45deg);
+    }
+    &.current,
+    &:hover {
+      opacity: 0.95;
+      background-color: $cGreenAccent;
+      color: $white;
+      cursor: pointer;
+      & span {
+        border-color: $white;
+      }
+    }
+  }
+}

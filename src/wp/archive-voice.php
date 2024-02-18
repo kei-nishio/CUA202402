@@ -114,8 +114,23 @@
       </ul>
 
       <!-- Pagination -->
-      <div class="page-voice__pagination">
-        <?php wp_pagenavi(); ?>
+      <div class="page-blog__pagination">
+        <?php // wp_pagenavi(); 
+        ?>
+        <?php
+        if (wp_is_mobile()) {
+          $mid_size = 1;
+        } else {
+          $mid_size = 2;
+        }
+        $args = array(
+          'prev_text' => '<span></span>',
+          'next_text' => '<span></span>',
+          'mid_size' => $mid_size, // 現在ページの左右に表示するページ番号の数
+          'end_size' => 0, // 末尾のページ番号リンクの数
+        );
+        the_posts_pagination($args);
+        ?>
       </div>
     </div>
   </div>
