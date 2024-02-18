@@ -15,7 +15,7 @@
           お探しのページが見つかりません。
         </div>
         <div class="page-404__button">
-          <a href="./" class="button button--white">
+          <a href="<?php echo esc_url(home_url('/')); ?>" class="button button--white">
             <p>page TOP</p>
             <div class="button__arrow arrow"></div>
           </a>

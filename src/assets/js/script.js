@@ -4,7 +4,7 @@ jQuery(function ($) {
 
   // ! function  // function myFunction(arg1, arg2) {}
   // * ヘッダー高さ分を考慮した遷移
-  function headerDown(linkAnchor, durationTime, easeType, a) {
+  function fncHeaderDown(linkAnchor, durationTime, easeType, a) {
     $("html, body").animate(
       {
         scrollTop: $("#" + linkAnchor).offset().top - headerHeightDefault * a,
@@ -14,7 +14,7 @@ jQuery(function ($) {
     );
   }
 
-  // * Promise用
+  // * Promise用 wait関数
   function wait(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
@@ -33,20 +33,20 @@ jQuery(function ($) {
   // * URLにアンカーがある場合はローディング後にヘッダー高さ分を下げる
   $("a").on("click", function () {
     let targetHref = $(this).attr("href");
-    if (targetHref && targetHref.includes("#")) {
-      // アンカーが同一ページにあるとき
-      let linkAnchor = $(this).attr("href").split("#")[1];
-      if ($("#" + linkAnchor).offset().top) {
-        headerDown(linkAnchor, 100, "linear", 1.1);
-      }
+    if (targetHref && targetHref.startsWith("#")) {
+      // リンク先が#で始まる場合
+      let linkAnchor = targetHref.substring(1); // #以下を変数として抜き出す
+      fncHeaderDown(linkAnchor, 100, "linear", 1.1);
     }
+    // リンク先が#で始まっていない場合は何もしない
   });
-  // 遷移先にアンカーがあるときは読み込み後に移動
+
+  // * 遷移先にアンカーがあるときは読み込み後に移動;
   $(window).on("load", function () {
     let targetHref = window.location.href;
     if (targetHref && targetHref.includes("#")) {
       let linkAnchor = window.location.href.split("#")[1];
-      headerDown(linkAnchor, 100, "linear", 1.1);
+      fncHeaderDown(linkAnchor, 100, "linear", 1.1);
     }
   });
 

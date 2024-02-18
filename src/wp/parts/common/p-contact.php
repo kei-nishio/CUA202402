@@ -38,7 +38,7 @@ if (!is_front_page()) {
         </div>
         <p class="contact__text">ご予約・お問合せはコチラ</p>
         <div class="contact__button">
-          <a href="./contact.html" class="button">
+          <a href="<?php echo esc_url(home_url('/contact')); ?>" class="button">
             <p>contact us</p>
             <div class="button__arrow arrow"></div>
           </a>

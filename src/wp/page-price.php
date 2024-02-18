@@ -34,10 +34,11 @@
       ?>
       <ul class="page-price__body">
         <?php if ($the_query->have_posts()) : ?>
+          <?php $i = 1 ?>
           <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
             <?php $post_id = get_the_ID(); ?>
             <?php $category_group = 'scf_diving_category_group'; ?>
-            <li class="page-price__container" id="price01">
+            <li class="page-price__container" id="price<?php echo esc_attr($i); ?>">
               <div class="page-price__product-title">
                 <h2 class="page-price__category"><?php the_title(); ?></h2>
                 <div class="page-price__icon">
@@ -54,6 +55,7 @@
                 <?php } ?>
               </dl>
             </li>
+            <?php $i++; ?>
           <?php endwhile; ?>
           <?php wp_reset_postdata(); ?>
         <?php else : ?>

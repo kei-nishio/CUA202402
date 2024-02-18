@@ -132,7 +132,7 @@
                   ?>
                   <li class="swiper-slide">
                     <div class="campaign__card card-campaign">
-                      <a href="./campaign.html" class="card-campaign__link">
+                      <a href="<?php echo esc_url(home_url('/campaign')); ?>" class="card-campaign__link">
                         <figure class="card-campaign__image">
                           <?php if (has_post_thumbnail()) : ?>
                             <img src="<?php the_post_thumbnail_url("full"); ?>" alt="<?php echo esc_attr($alt); ?>">
@@ -182,7 +182,7 @@
       </div>
 
       <div class="campaign__button">
-        <a href="./campaign.html" class="button">
+        <a href="<?php echo esc_url(home_url('/campaign')); ?>" class="button">
           <p>view more</p>
           <div class="button__arrow arrow"></div>
         </a>
@@ -222,7 +222,7 @@
               ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキストが入ります。ここにテキスト
             </p>
             <div class="about-us__button">
-              <a href="./about-us.html" class="button">
+              <a href="<?php echo esc_url(home_url('/about-us')); ?>" class="button">
                 <p>view more</p>
                 <div class="button__arrow arrow"></div>
               </a>
@@ -262,7 +262,7 @@
           <h3 class="information__sub-title"><?php echo esc_html($term_name); ?></h3>
           <p class="information__text"><?php echo esc_html($term_description); ?></p>
           <div class="information__button">
-            <a href="./information.html" class="button">
+            <a href="<?php echo esc_url(home_url('/information')); ?>" class="button">
               <p>view more</p>
               <div class="button__arrow arrow"></div>
             </a>
@@ -301,7 +301,7 @@
         <?php endif; ?>
       </ul>
       <div class="top-blog__button">
-        <a href="./blog.html" class="button">
+        <a href="<?php echo esc_url(home_url('/blog')); ?>" class="button">
           <p>view more</p>
           <div class="button__arrow arrow"></div>
         </a>
@@ -377,7 +377,7 @@
       </ul>
 
       <div class="voice__button">
-        <a href="./voice.html" class="button">
+        <a href="<?php echo esc_url(home_url('/voice')); ?>" class="button">
           <p>view more</p>
           <div class="button__arrow arrow"></div>
         </a>
@@ -435,7 +435,7 @@
         </figure>
       </div>
       <div class="price__button">
-        <a href="./price.html" class="button">
+        <a href="<?php echo esc_url(home_url('/price')); ?>" class="button">
           <p>view more</p>
           <div class="button__arrow arrow"></div>
         </a>

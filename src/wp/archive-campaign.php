@@ -127,7 +127,7 @@
                     </div>
                     <p class="card-campaign__contact-text">ご予約・お問合せはコチラ</p>
                     <div class="card-campaign__button">
-                      <a href="./contact.html" class="button">
+                      <a href="<?php echo esc_url(home_url('/contact')); ?>" class="button">
                         <p>contact us</p>
                         <div class="button__arrow arrow"></div>
                       </a>

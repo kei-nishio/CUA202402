@@ -4,7 +4,9 @@
   display: flex;
   justify-content: space-between;
   gap: rem(19);
-  flex-wrap: wrap;
+  @include mq {
+    flex-wrap: wrap;
+  }
 }
 .categories-with-whale__item {
   display: flex;
