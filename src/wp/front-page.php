@@ -57,9 +57,9 @@
         <div class="main-view__swiper js-main-view-swiper">
           <div class="swiper">
             <ul class="swiper-wrapper">
-              <?php
-              // カスタムフィールドから4つの画像を取得
-              for ($i = 1; $i <= 4; $i++) {
+              <?php for ($i = 1; $i <= 4; $i++) : ?>
+                <?php
+                // カスタムフィールドから4つの画像を取得
                 $image_pc = get_field('acf_fv_image_pc_' . $i);
                 $image_sp = get_field('acf_fv_image_sp_' . $i);
                 $image_no_image = get_template_directory_uri() . '/assets/images/common/noimage.jpg';
@@ -75,16 +75,14 @@
                 else :
                   $url_sp = $image_no_image;
                 endif;
-              ?>
+                ?>
                 <li class="swiper-slide">
                   <picture class="main-view__image">
                     <source srcset="<?php echo  esc_url($image_pc['url']); ?>" media="(min-width:768px)" />
                     <img src="<?php echo  esc_url($image_sp['url']); ?>" alt="<?php echo  esc_attr($image_pc['alt']); ?>" />
                   </picture>
                 </li>
-              <?php
-              }
-              ?>
+              <?php endfor; ?>
             </ul>
           </div>
         </div>
@@ -115,7 +113,7 @@
           ?>
           <ul class="swiper-wrapper">
             <?php if ($the_query->have_posts()) : ?>
-              <?php for ($i = 0; $i < 2; $i++) { ?>
+              <?php for ($i = 0; $i < 2; $i++) : ?>
                 <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
                   <?php
                   $post_id = get_the_ID(); // 投稿の ID を指定
@@ -158,7 +156,7 @@
                     </div>
                   </li>
                 <?php endwhile; ?>
-              <?php } ?>
+              <?php endfor; ?>
               <?php wp_reset_postdata(); ?>
             <?php else : ?>
               <li>記事が投稿されていません</li>
