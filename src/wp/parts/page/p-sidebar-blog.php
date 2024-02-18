@@ -191,26 +191,26 @@
       preg_match_all('/href=\'(.+?)\'>(.+?)<\/a>/', $archives, $matches);
       // アーカイブリストを年ごとに整理
       $archives_by_year = [];
-      foreach ($matches[2] as $index => $text) {
+      foreach ($matches[2] as $index => $text) :
         // 年と月をテキストから抽出
         $year = substr($text, 0, 7);
         $month = substr($text, 7);
         // 年毎の配列を作成
-        if (!array_key_exists($year, $archives_by_year)) {
+        if (!array_key_exists($year, $archives_by_year)) :
           $archives_by_year[$year] = [];
-        }
+        endif;
         // リンクを配列に追加
         $archives_by_year[$year][] = '<li class="sidebar__archive-month"><a href="' . esc_url($matches[1][$index]) . '">' . esc_html($month) . '</a></li>';
-      }
+      endforeach;
       // 各年ごとに<ul>リストを作成して出力
-      foreach ($archives_by_year as $year => $months) {
+      foreach ($archives_by_year as $year => $months) :
         echo '<li class="sidebar__archive-list">';
         echo '<span class="sidebar__archive-year js-archive-button">' . esc_html($year) . '</span>';
         echo '<ul class="sidebar__archive-months">';
         echo implode('', $months);
         echo '</ul>';
         echo '</li>';
-      }
+      endforeach;
       ?>
     </ul>
   </section>

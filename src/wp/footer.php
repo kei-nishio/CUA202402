@@ -1,12 +1,12 @@
 <!-- Footer -->
 <?php
-if (is_404()) {
+if (is_404()) :
   $class = 'footer footer--404';
-} elseif (is_page('contact-thank')) {
+elseif (is_page('contact-thank')) :
   $class = 'footer footer--contact-thank';
-} else {
+else :
   $class = 'footer';
-}
+endif;
 ?>
 <footer class="<?php echo esc_attr($class); ?>">
   <div class="footer__inner inner">

@@ -1,11 +1,11 @@
 <?php
-if (is_404()) {
+if (is_404()) :
   $class = 'breadcrumb breadcrumb--404';
-} else {
+else :
   $class = 'breadcrumb';
-}
+endif;
 ?>
-<?php if (function_exists('bcn_display')) { ?>
+<?php if (function_exists('bcn_display')) : ?>
   <div class="<?php echo esc_attr($class); ?>" vocab="http://schema.org/" typeof="BreadcrumbList">
     <div class="breadcrumb__inner inner">
       <div class="breadcrumb__container">
@@ -13,4 +13,4 @@ if (is_404()) {
       </div>
     </div>
   </div>
-<?php } ?>
+<?php endif; ?>

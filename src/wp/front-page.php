@@ -14,19 +14,19 @@
         $image_sp = get_field('acf_fv_image_sp_1');
         $image_no_image = get_template_directory_uri() . '/assets/images/common/noimage.jpg';
         // PC画像がある場合はPC画像を、ない場合はnoimageを表示
-        if ($image_pc) {
+        if ($image_pc) :
           $url_pc = esc_url($image_pc['url']);
           $alt = esc_attr($image_pc['alt']);
-        } else {
+        else :
           $url_pc = $image_no_image;
           $alt = 'ノーイメージ';
-        }
+        endif;
         // SP画像がある場合はSP画像を、ない場合はnoimageを表示
-        if ($image_sp) {
+        if ($image_sp) :
           $url_sp = esc_url($image_sp['url']);
-        } else {
+        else :
           $url_sp = $image_no_image;
-        }
+        endif;
         ?>
         <div class="loading__left">
           <picture class="loading__image js-loading-left">
@@ -63,18 +63,18 @@
                 $image_pc = get_field('acf_fv_image_pc_' . $i);
                 $image_sp = get_field('acf_fv_image_sp_' . $i);
                 $image_no_image = get_template_directory_uri() . '/assets/images/common/noimage.jpg';
-                if ($image_pc) {
+                if ($image_pc) :
                   $url_pc = esc_url($image_pc['url']);
                   $alt = esc_attr($image_pc['alt']);
-                } else {
+                else :
                   $url_pc = $image_no_image;
                   $alt = 'ノーイメージ';
-                }
-                if ($image_sp) {
+                endif;
+                if ($image_sp) :
                   $url_sp = esc_url($image_sp['url']);
-                } else {
+                else :
                   $url_sp = $image_no_image;
-                }
+                endif;
               ?>
                 <li class="swiper-slide">
                   <picture class="main-view__image">
@@ -115,10 +115,7 @@
           ?>
           <ul class="swiper-wrapper">
             <?php if ($the_query->have_posts()) : ?>
-              <?php
-              // 2回ループして2倍の記事を取得（swiper10用）
-              for ($i = 0; $i < 2; $i++) {
-              ?>
+              <?php for ($i = 0; $i < 2; $i++) { ?>
                 <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
                   <?php
                   $post_id = get_the_ID(); // 投稿の ID を指定
@@ -368,22 +365,29 @@
         <ul class="price__lists">
           <?php if ($the_query->have_posts()) : ?>
             <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-              <?php $post_id = get_the_ID(); ?>
-              <?php $category_group = 'scf_diving_category_group'; ?>
-              <li class="price__list">
-                <div class="diving-products">
-                  <h3 class="diving-products__category"><?php the_title(); ?></h3>
-                  <dl class="diving-products__list">
-                    <?php
-                    $fields = SCF::get($category_group, $post_id);
-                    foreach ($fields as $field) {
-                    ?>
-                      <dt class="diving-products__name"><?php echo esc_html($field['scfdivingcategorycourse']); ?></dt>
-                      <dd class="diving-products__price"><?php echo esc_html('¥' . number_format($field['scfdivingcategoryprice'])); ?></dd>
-                    <?php } ?>
-                  </dl>
-                </div>
-              </li>
+              <?php if (get_the_title() !== "") : ?>
+                <?php
+                // タイトルがある場合のみ処理を続行する
+                $post_id = get_the_ID();
+                $category_group = 'scf_diving_category_group';
+                $result_not_empty = check_fields_not_empty($post_id, $category_group);
+                $result_numeric = check_fields_numeric($post_id, $category_group, 'scfdivingcategoryprice');
+                $fields = SCF::get($category_group, $post_id);
+                // フィールド値に空白がないかつ価格が半角数字の場合のみ処理を続行する
+                ?>
+                <?php if ($result_not_empty === false || $result_numeric === false) continue; ?>
+                <li class="price__list">
+                  <div class="diving-products">
+                    <h3 class="diving-products__category"><?php the_title(); ?></h3>
+                    <dl class="diving-products__list">
+                      <?php foreach ($fields as $field) : ?>
+                        <dt class="diving-products__name"><?php echo esc_html($field['scfdivingcategorycourse']); ?></dt>
+                        <dd class="diving-products__price"><?php echo esc_html('¥' . number_format($field['scfdivingcategoryprice'])); ?></dd>
+                      <?php endforeach; ?>
+                    </dl>
+                  </div>
+                </li>
+              <?php endif; ?>
             <?php endwhile; ?>
             <?php wp_reset_postdata(); ?>
           <?php else : ?>

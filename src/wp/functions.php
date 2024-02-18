@@ -35,7 +35,10 @@ get_template_part('/parts/functions-lib/fncs_post_label_change');
 get_template_part('/parts/functions-lib/fncs_redirect_singular');
 
 // ! Smart Custom Field のオプション投稿を追加する
-get_template_part('/parts/functions-lib/fncs_scf');
+get_template_part('/parts/functions-lib/fncs_scf_add_option');
+
+// ! Smart Custom Field のフィールド値を判定する
+get_template_part('/parts/functions-lib/fncs_scf_field_validation');
 
 // ! カスタムページネーションを追加する
 get_template_part('/parts/functions-lib/fncs_custom_pagination');

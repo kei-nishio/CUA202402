@@ -35,39 +35,37 @@
         <!-- Categories -->
         <div class="page-information__categories categories-with-whale">
           <ul class="categories-with-whale__items">
-            <?php
-            if ($terms) {
-              foreach ($terms as $term) {
+            <?php if ($terms) : ?>
+              <?php foreach ($terms as $term) : ?>
+                <?php
                 $term_id = $term->term_id;
                 $term_name = str_replace('|', '<br class="u-mobile" />', $term->name);
                 $term_slug = $term->slug;
                 // アイコンのファイル名
                 $term_icon = 'icon_' . $term_slug . '.png';
                 $term_icon_path = get_theme_file_path() . '/assets/images/diving_category/' . $term_icon;
-                if (file_exists($term_icon_path)) {
+                if (file_exists($term_icon_path)) :
                   $term_icon_url = get_theme_file_uri() . '/assets/images/diving_category/' . $term_icon;
-                } else {
+                else :
                   $term_icon_url = get_theme_file_uri() . '/assets/images/diving_category/noimage.jpg';
-                }
-            ?>
+                endif;
+                ?>
                 <li class="categories-with-whale__item js-category-button" data-target="<?php echo esc_attr($term_id); ?>">
                   <div class="categories-with-whale__icon u-desktop">
                     <img src="<?php echo esc_url($term_icon_url); ?>" alt="魚のアイコン" />
                   </div>
                   <?php echo $term_name; ?>
                 </li>
-            <?php
-              }
-            }
-            ?>
+              <?php endforeach; ?>
+            <?php endif; ?>
           </ul>
         </div>
 
         <!-- Containers -->
         <ul class="page-information__containers">
-          <?php
-          if ($terms) {
-            foreach ($terms as $term) {
+          <?php if ($terms) : ?>
+            <?php foreach ($terms as $term) : ?>
+              <?php
               $term_id = $term->term_id;
               $term_name = $term->name;
               $term_slug = $term->slug;
@@ -76,12 +74,14 @@
               $term_image = 'image_' . $term_slug . '.jpg';
               $term_image_url = get_theme_file_uri() . '/assets/images/diving_category/' . $term_image;
               $term_image_path = get_theme_file_path() . '/assets/images/diving_category/' . $term_image;
-              if (file_exists($term_image_path)) {
+              ?>
+              <?php
+              if (file_exists($term_image_path)) :
                 $term_image_url = get_theme_file_uri() . '/assets/images/diving_category/' . $term_image;
-              } else {
+              else :
                 $term_image_url = get_theme_file_uri() . '/assets/images/diving_category/noimage.jpg';
-              }
-          ?>
+              endif;
+              ?>
               <li class="page-information__container js-category-content" id="<?php echo esc_attr($term_id); ?>">
                 <div class="page-information__text-box">
                   <h2 class="page-information__title"><?php echo esc_html($term_name); ?></h2>
@@ -91,10 +91,8 @@
                   <img src="<?php echo esc_url($term_image_url); ?>" alt="カテゴリーのイメージ写真" />
                 </figure>
               </li>
-          <?php
-            }
-          }
-          ?>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </ul>
       </div>
     </div>

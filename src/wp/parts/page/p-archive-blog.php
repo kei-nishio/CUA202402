@@ -15,11 +15,11 @@
   <?php // wp_pagenavi(); 
   ?>
   <?php
-  if (wp_is_mobile()) {
+  if (wp_is_mobile()) :
     $mid_size = 1;
-  } else {
+  else :
     $mid_size = 2;
-  }
+  endif;
   $args = array(
     'prev_text' => '<span></span>',
     'next_text' => '<span></span>',

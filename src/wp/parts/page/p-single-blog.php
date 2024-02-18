@@ -21,14 +21,9 @@
 <!-- Pagination -->
 <?php
 $prev = get_previous_post();
-if (!empty($prev)) {
-  $prev_url = esc_url(get_permalink($prev->ID));
-}
-
 $next = get_next_post();
-if (!empty($next)) {
-  $next_url = esc_url(get_permalink($next->ID));
-}
+if (!empty($prev)) $prev_url = esc_url(get_permalink($prev->ID));
+if (!empty($next)) $next_url = esc_url(get_permalink($next->ID));
 ?>
 <div class="page-blog__pagination-single pagination">
   <div class="pagination__body">

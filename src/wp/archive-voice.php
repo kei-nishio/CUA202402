@@ -36,7 +36,6 @@
             esc_html('ALL')
           );
           echo sprintf(esc_html__('%s', 'textdomain'), $home_link);
-
           // タクソノミーのリンク
           $taxonomy = 'voice_category';
           $current_term_id = get_queried_object_id();
@@ -46,8 +45,8 @@
             'order'   => 'ASC',
             'number'  => 5
           ));
-          if ($terms) {
-            foreach ($terms as $term) {
+          if ($terms) :
+            foreach ($terms as $term) :
               $term_class = ($current_term_id === $term->term_id) ? 'is-active' : '';
               $term_link = sprintf(
                 '<li class="categories__item %s"><a href="%s" class="categories__link" title="%s">%s</a></li>',
@@ -58,8 +57,8 @@
                 esc_html($term->name)
               );
               echo sprintf(esc_html__('%s', 'textdomain'), $term_link);
-            }
-          }
+            endforeach;
+          endif;
           ?>
         </ul>
       </div>
@@ -68,7 +67,7 @@
       <ul class="page-voice__cards cards02 cards02--c2">
         <?php if (have_posts()) : ?>
           <?php while (have_posts()) : the_post(); ?>
-            <?php get_template_part('/parts/card/p-card-voice.php') ?>
+            <?php get_template_part('/parts/card/p-card-voice') ?>
           <?php endwhile; ?>
         <?php else : ?>
           <li>記事が投稿されていません</li>
@@ -80,11 +79,11 @@
         <?php // wp_pagenavi(); 
         ?>
         <?php
-        if (wp_is_mobile()) {
+        if (wp_is_mobile()) :
           $mid_size = 1;
-        } else {
+        else :
           $mid_size = 2;
-        }
+        endif;
         $args = array(
           'prev_text' => '<span></span>',
           'next_text' => '<span></span>',

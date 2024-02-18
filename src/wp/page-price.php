@@ -36,26 +36,40 @@
         <?php if ($the_query->have_posts()) : ?>
           <?php $i = 1 ?>
           <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-            <?php $post_id = get_the_ID(); ?>
-            <?php $category_group = 'scf_diving_category_group'; ?>
-            <li class="page-price__container" id="price<?php echo esc_attr($i); ?>">
-              <div class="page-price__product-title">
-                <h2 class="page-price__category"><?php the_title(); ?></h2>
-                <div class="page-price__icon">
-                  <img src="<?php echo get_theme_file_uri(); ?>/assets/images/ornaments/fish-whale-green.png" alt="緑色のクジラのアイコン" />
+            <?php if (get_the_title() !== "") : ?>
+              <?php
+              // タイトルがある場合のみ処理を続行する
+              $post_id = get_the_ID();
+              $category_group = 'scf_diving_category_group';
+              $result_not_empty = check_fields_not_empty($post_id, $category_group);
+              $result_numeric = check_fields_numeric($post_id, $category_group, 'scfdivingcategoryprice');
+              $fields = SCF::get($category_group, $post_id);
+              // フィールド値に空白がないかつ価格が半角数字の場合のみ処理を続行する
+              ?>
+              <?php if ($result_not_empty === false || $result_numeric === false) continue; ?>
+              <li class="page-price__container" id="price<?php echo esc_attr($i); ?>">
+                <div class="page-price__product-title">
+                  <h2 class="page-price__category"><?php the_title(); ?></h2>
+                  <div class="page-price__icon">
+                    <img src="<?php echo get_theme_file_uri(); ?>/assets/images/ornaments/fish-whale-green.png" alt="緑色のクジラのアイコン" />
+                  </div>
                 </div>
-              </div>
-              <dl class="page-price__product-table">
-                <?php
-                $fields = SCF::get($category_group, $post_id);
-                foreach ($fields as $field) {
-                ?>
-                  <dt class="page-price__product-name"><?php echo esc_html($field['scfdivingcategorycourse']); ?></dt>
-                  <dd class="page-price__product-price"><?php echo esc_html('¥' . number_format($field['scfdivingcategoryprice'])); ?></dd>
-                <?php } ?>
-              </dl>
-            </li>
-            <?php $i++; ?>
+                <dl class="page-price__product-table">
+                  <?php foreach ($fields as $field) : ?>
+                    <?php
+                    $course = $field['scfdivingcategorycourse'];
+                    $price = $field['scfdivingcategoryprice'];
+                    ?>
+                    <?php if ($course && $price) : ?>
+                      <dt class="page-price__product-name"><?php echo esc_html($course); ?></dt>
+                      <dd class="page-price__product-price"><?php echo esc_html('¥' . number_format($price)); ?></dd>
+                    <?php else : continue; ?>
+                    <?php endif; ?>
+                  <?php endforeach; ?>
+                </dl>
+              </li>
+              <?php $i++; ?>
+            <?php endif; ?>
           <?php endwhile; ?>
           <?php wp_reset_postdata(); ?>
         <?php else : ?>

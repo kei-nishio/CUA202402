@@ -26,16 +26,15 @@
         <!-- Left side -->
         <div class="page-blog__left-side">
           <?php
-          if (is_single()) {
+          if (is_single()) :
             // シングルページの場合
             get_template_part('/parts/page/p-single-blog');
-          } else {
+          else :
             // アーカイブページの場合
             get_template_part('/parts/page/p-archive-blog');
-          }
+          endif;
           ?>
         </div>
-
         <!-- Right side -->
         <aside class="page-blog__right-side">
           <?php get_template_part('/parts/page/p-sidebar-blog') ?>

@@ -1,12 +1,12 @@
 <?php
-if (!is_front_page()) {
-  $add_class = 'top-contact--page';
-} else {
-  $add_class = '';
-}
+if (!is_front_page()) :
+  $class = 'contact top-contact top-contact--page treatment';
+else :
+  $class = 'contact top-contact treatment';
+endif;
 ?>
 
-<section id="contact" class="contact top-contact <?php echo esc_attr($add_class); ?> treatment">
+<section id="contact" class="<?php echo esc_attr($class); ?>">
   <div class="contact__inner inner">
     <div class="contact__body">
       <div class="contact__access">

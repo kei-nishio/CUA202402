@@ -30,19 +30,17 @@
         $field_question = 'scfquestion';
         $field_answer = 'scfanswer';
         $fields = SCF::get_option_meta($post_id, $field_group);
-        foreach ($fields as $field) {
-          if (!empty($field[$field_question])) {
         ?>
+        <?php foreach ($fields as $field) : ?>
+          <?php if (!empty($field[$field_question])) : ?>
             <li class="page-faq__item">
               <dl class="page-faq__qa">
-                <dt class="page-faq__question js-faq-accordion"> <?php echo $field[$field_question]; ?></dt>
-                <dd class="page-faq__answer"> <?php echo $field[$field_answer]; ?></dd>
+                <dt class="page-faq__question js-faq-accordion"><?php echo $field[$field_question]; ?></dt>
+                <dd class="page-faq__answer"><?php echo $field[$field_answer]; ?></dd>
               </dl>
             </li>
-        <?php
-          }
-        }
-        ?>
+          <?php endif; ?>
+        <?php endforeach;  ?>
       </ul>
     </div>
   </div>

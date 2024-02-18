@@ -53,21 +53,21 @@
         $field_group = 'scf_gallery_image_group';
         $field_item = 'scfgalleryimage';
         $fields = SCF::get_option_meta($post_id, $field_group);
-        foreach ($fields as $field) {
+        ?>
+        <?php foreach ($fields as $field) : ?>
+          <?php
           $img_id = $field[$field_item];
           $image_url = wp_get_attachment_image_url($img_id, 'full');
           $image_alt = get_post_meta($img_id, '_wp_attachment_image_alt', true);
-          if (!empty($image_url)) {
-        ?>
+          ?>
+          <?php if (!empty($image_url)) : ?>
             <li class="gallery__item">
               <p class="gallery__photo js-modal-open">
                 <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>">
               </p>
             </li>
-        <?php
-          }
-        }
-        ?>
+          <?php endif; ?>
+        <?php endforeach; ?>
       </ul>
 
       <!-- modal -->
