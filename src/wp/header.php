@@ -90,7 +90,7 @@
         <div class="header__drawer-mask"></div>
         <div class="header__drawer-inner">
           <div class="header__sp-nav navigation">
-          <?php get_template_part("/parts/common/p-navigation") ?>
+            <?php get_template_part('/parts/common/p-navigation') ?>
           </div>
         </div>
       </div>

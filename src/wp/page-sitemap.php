@@ -20,20 +20,20 @@
   </section>
 
   <!-- Breadcrumb -->
-  <?php get_template_part("/parts/common/p-breadcrumb"); ?>
+  <?php get_template_part('/parts/common/p-breadcrumb'); ?>
 
   <!-- site map -->
   <div class="page-site-map page-top treatment">
     <div class="page-site-map__inner inner">
       <div class="page-site-map__body">
         <div class="page-site-map__nav navigation navigation--black">
-          <?php get_template_part("/parts/common/p-navigation") ?>
+          <?php get_template_part('/parts/common/p-navigation') ?>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Contact -->
-  <?php get_template_part("/parts/common/p-contact"); ?>
+  <?php get_template_part('/parts/common/p-contact'); ?>
 </main>
 <?php get_footer(); ?>

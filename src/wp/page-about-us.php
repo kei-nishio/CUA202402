@@ -17,7 +17,7 @@
   </section>
 
   <!-- Breadcrumb -->
-  <?php get_template_part("/parts/common/p-breadcrumb"); ?>
+  <?php get_template_part('/parts/common/p-breadcrumb'); ?>
 
   <!-- About us -->
   <div class="page-about-us page-top treatment">
@@ -82,6 +82,6 @@
   </section>
 
   <!-- Contact -->
-  <?php get_template_part("/parts/common/p-contact"); ?>
+  <?php get_template_part('/parts/common/p-contact'); ?>
 </main>
 <?php get_footer(); ?>

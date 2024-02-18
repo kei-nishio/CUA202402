@@ -27,7 +27,7 @@ if (is_404()) {
       </div>
 
       <div class="footer__nav navigation">
-        <?php get_template_part("/parts/common/p-navigation") ?>
+        <?php get_template_part('/parts/common/p-navigation') ?>
       </div>
     </div>
   </div>

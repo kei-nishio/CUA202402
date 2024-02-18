@@ -1,1 +1,1 @@
-<?php get_template_part("/archive-voice");
+<?php get_template_part('/archive-voice');

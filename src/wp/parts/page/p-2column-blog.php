@@ -17,7 +17,7 @@
   </section>
 
   <!-- Breadcrumb -->
-  <?php get_template_part("/parts/common/p-breadcrumb"); ?>
+  <?php get_template_part('/parts/common/p-breadcrumb'); ?>
 
   <!-- blog -->
   <div class="page-blog page-top treatment">
@@ -28,24 +28,24 @@
           <?php
           if (is_single()) {
             // シングルページの場合
-            get_template_part("/parts/common/p-single-blog");
+            get_template_part('/parts/page/p-single-blog');
           } else {
             // アーカイブページの場合
-            get_template_part("/parts/common/p-archive-blog");
+            get_template_part('/parts/page/p-archive-blog');
           }
           ?>
         </div>
 
         <!-- Right side -->
         <aside class="page-blog__right-side">
-          <?php get_template_part("/parts/common/p-sidebar-blog") ?>
+          <?php get_template_part('/parts/page/p-sidebar-blog') ?>
         </aside>
       </div>
     </div>
   </div>
 
   <!-- Contact -->
-  <?php get_template_part("/parts/common/p-contact"); ?>
+  <?php get_template_part('/parts/common/p-contact'); ?>
 </main>
 
 <?php get_footer(); ?>

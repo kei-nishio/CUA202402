@@ -2,7 +2,7 @@
 <main>
 
   <!-- Breadcrumb -->
-  <?php get_template_part("/parts/common/p-breadcrumb"); ?>
+  <?php get_template_part('/parts/common/p-breadcrumb'); ?>
 
   <!-- site map -->
   <div class="page-404">

@@ -17,28 +17,28 @@ function my_setup()
 }
 
 // ! headでgoogle fontやCDNを読み込む
-get_template_part("/parts/functions-lib/fncs_script");
+get_template_part('/parts/functions-lib/fncs_script');
 
 // ! カスタム投稿の表示件数を設定する
-get_template_part("/parts/functions-lib/fncs_posts_page");
+get_template_part('/parts/functions-lib/fncs_posts_page');
 
 // ! Contact Form 7で自動挿入されるPタグ、brタグを削除
-get_template_part("/parts/functions-lib/fncs_wpcf7_reset");
+get_template_part('/parts/functions-lib/fncs_wpcf7_reset');
 
 // ! Contact Form 7でセレクトボックスをカスタマイズする
-get_template_part("/parts/functions-lib/fncs_wpcf7_custom_select");
+get_template_part('/parts/functions-lib/fncs_wpcf7_custom_select');
 
 // ! 通常投稿タイプのラベルを変更する
-get_template_part("/parts/functions-lib/fncs_post_label_change");
+get_template_part('/parts/functions-lib/fncs_post_label_change');
 
 // ! 個別記事なし投稿の場合リダイレクトする
-get_template_part("/parts/functions-lib/fncs_redirect_singular");
+get_template_part('/parts/functions-lib/fncs_redirect_singular');
 
 // ! Smart Custom Field のオプション投稿を追加する
-get_template_part("/parts/functions-lib/fncs_scf");
+get_template_part('/parts/functions-lib/fncs_scf');
 
 // ! カスタムページネーションを追加する
-get_template_part("/parts/functions-lib/fncs_custom_pagination");
+get_template_part('/parts/functions-lib/fncs_custom_pagination');
 
 // ! カスタムメニューを追加する
-// get_template_part("/parts/functions-lib/fncs_add_menu");
+// get_template_part('/parts/functions-lib/fncs_add_menu');

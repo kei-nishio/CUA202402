@@ -17,7 +17,7 @@
   </section>
 
   <!-- Breadcrumb -->
-  <?php get_template_part("/parts/common/p-breadcrumb"); ?>
+  <?php get_template_part('/parts/common/p-breadcrumb'); ?>
 
   <!-- Information -->
   <div class="page-information page-top page-top--long treatment">
@@ -101,6 +101,6 @@
   </div>
 
   <!-- Contact -->
-  <?php get_template_part("/parts/common/p-contact"); ?>
+  <?php get_template_part('/parts/common/p-contact'); ?>
 </main>
 <?php get_footer(); ?>

@@ -1,1 +1,1 @@
-<?php get_template_part("/parts/common/p-2column-blog");
+<?php get_template_part('/parts/page/p-2column-blog');

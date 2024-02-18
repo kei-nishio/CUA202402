@@ -2,7 +2,7 @@
   <?php if (have_posts()) : ?>
     <?php while (have_posts()) : the_post(); ?>
       <li class="cards01__card">
-        <?php get_template_part("/parts/card/p-card-blog") ?>
+        <?php get_template_part('/parts/card/p-card-blog') ?>
       </li>
     <?php endwhile; ?>
   <?php else : ?>

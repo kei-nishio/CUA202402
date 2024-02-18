@@ -17,7 +17,7 @@
   </section>
 
   <!-- Breadcrumb -->
-  <?php get_template_part("/parts/common/p-breadcrumb"); ?>
+  <?php get_template_part('/parts/common/p-breadcrumb'); ?>
 
   <!-- Thanks -->
   <div class="page-thanks page-top treatment">

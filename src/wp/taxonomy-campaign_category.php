@@ -1,1 +1,1 @@
-<?php get_template_part("/archive-campaign");
+<?php get_template_part('/archive-campaign');
