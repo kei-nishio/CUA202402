@@ -31,7 +31,8 @@ if (is_404()) {
       </div>
     </div>
   </div>
-  <small class="footer__copy">Copyright &copy; 2021 - 2023 CodeUps LLC. All Rights Reserved.</small>
+  <small class="footer__copy">Copyright &copy; 2023 - <?php the_time("Y"); ?> CodeUps LLC. All Rights Reserved.</small>
+
 
   <!-- to top button -->
   <div class="footer__scroll-top-button js-scroll-top-button">

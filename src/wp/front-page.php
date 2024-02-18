@@ -129,10 +129,14 @@
                   // カスタムフィールドの金額を取得
                   $price_before = number_format(get_field('acf_parice_before'));
                   $price_after = number_format(get_field('acf_parice_after'));
+                  // タクソノミーを表示
+                  $taxonomy = 'campaign_category';
+                  $terms = get_the_terms($post_id, $taxonomy);
+                  $term_url = esc_url(get_term_link($terms[0], $taxonomy));
                   ?>
                   <li class="swiper-slide">
                     <div class="campaign__card card-campaign">
-                      <a href="<?php echo esc_url(home_url('/campaign')); ?>" class="card-campaign__link">
+                      <a href="<?php echo $term_url; ?>" class="card-campaign__link">
                         <figure class="card-campaign__image">
                           <?php if (has_post_thumbnail()) : ?>
                             <img src="<?php the_post_thumbnail_url("full"); ?>" alt="<?php echo esc_attr($alt); ?>">
@@ -141,12 +145,7 @@
                           <?php endif; ?>
                         </figure>
                         <div class="card-campaign__meta">
-                          <?php
-                          // タクソノミーを表示
-                          $taxonomy = 'campaign_category';
-                          $terms = get_the_terms($post_id, $taxonomy);
-                          if (!is_wp_error($terms) && !empty($terms)) :
-                          ?>
+                          <?php if (!is_wp_error($terms) && !empty($terms)) : ?>
                             <span class="card-campaign__category category-diving"><?php echo esc_html($terms[0]->name); ?></span>
                           <?php endif; ?>
                           <h3 class="card-campaign__title"><?php the_title(); ?></h3>

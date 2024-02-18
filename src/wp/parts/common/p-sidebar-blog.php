@@ -160,7 +160,7 @@
       <?php endif; ?>
     </ul>
     <div class="sidebar__button-campaign">
-      <a href="<?php echo esc_url(home_url('/voice')); ?>" class="button">
+      <a href="<?php echo esc_url(home_url('/campaign')); ?>" class="button">
         <p>view more</p>
         <div class="button__arrow arrow"></div>
       </a>

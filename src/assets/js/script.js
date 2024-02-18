@@ -41,7 +41,7 @@ jQuery(function ($) {
     // リンク先が#で始まっていない場合は何もしない
   });
 
-  // * 遷移先にアンカーがあるときは読み込み後に移動;
+  // * 遷移先にアンカーがあるときは読み込み後にヘッダー高さを考慮して移動;
   $(window).on("load", function () {
     let targetHref = window.location.href;
     if (targetHref && targetHref.includes("#")) {
@@ -90,8 +90,6 @@ jQuery(function ($) {
 
     sessionStorage.setItem("visited", "true");
   }
-
-  $(window).on("load", function () {});
 
   // * hamburger and drawer
   $(".js-hamburger , .js-drawer-menu").click(function () {
@@ -185,7 +183,7 @@ jQuery(function ($) {
   const open = $(".js-modal-open");
   const close = $(".js-modal-close");
   const specifiedWidth = 768;
-  // 開くボタンをクリックしたらモーダルを表示する
+  // 768px以上で開くボタンをクリックしたらモーダルを表示する
   open.on("click", function () {
     if (windowWidth >= specifiedWidth) {
       let imageSrc = $(this).children("img").attr("src");
