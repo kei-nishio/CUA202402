@@ -44,6 +44,8 @@
                 // アイコンのファイル名
                 $term_icon = 'icon_' . $term_slug . '.png';
                 $term_icon_path = get_theme_file_path() . '/assets/images/diving_category/' . $term_icon;
+                ?>
+                <?php
                 if (file_exists($term_icon_path)) :
                   $term_icon_url = get_theme_file_uri() . '/assets/images/diving_category/' . $term_icon;
                 else :
@@ -67,7 +69,7 @@
             <?php foreach ($terms as $term) : ?>
               <?php
               $term_id = $term->term_id;
-              $term_name = $term->name;
+              $term_name = str_replace('|', '', $term->name);
               $term_slug = $term->slug;
               $term_description = $term->description;
               // 画像のファイル名
