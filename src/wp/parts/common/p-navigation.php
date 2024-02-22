@@ -42,7 +42,7 @@
         <?php foreach ($terms as $term) : ?>
           <?php
           $term_id = $term->term_id;
-          $term_name = str_replace('|', '<br class="u-mobile" />', $term->name);
+          $term_name = str_replace('|', '', $term->name);
           ?>
           <li class="navigation__sub-item"><a href="<?php echo esc_url(home_url('/information?id=' . $term_id)); ?>"><?php echo $term_name; ?></a></li>
         <?php endforeach; ?>

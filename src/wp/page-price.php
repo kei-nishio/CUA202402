@@ -59,11 +59,11 @@
                 <dl class="page-price__product-table">
                   <?php foreach ($fields as $field) : ?>
                     <?php
-                    $course = $field[$field_course];
+                    $course = str_replace('|', '<br class="u-mobile" />', $field[$field_course]);
                     $price = $field[$field_price];
                     ?>
                     <?php if ($course && $price) : ?>
-                      <dt class="page-price__product-name"><?php echo esc_html($course); ?></dt>
+                      <dt class="page-price__product-name"><?php echo $course; ?></dt>
                       <dd class="page-price__product-price"><?php echo esc_html('¥' . number_format($price)); ?></dd>
                     <?php else : continue; ?>
                     <?php endif; ?>

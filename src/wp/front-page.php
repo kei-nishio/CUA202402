@@ -379,8 +379,12 @@
                     <h3 class="diving-products__category"><?php the_title(); ?></h3>
                     <dl class="diving-products__list">
                       <?php foreach ($fields as $field) : ?>
-                        <dt class="diving-products__name"><?php echo esc_html($field[$field_course]); ?></dt>
-                        <dd class="diving-products__price"><?php echo esc_html('¥' . number_format($field[$field_price])); ?></dd>
+                        <?php
+                        $course = str_replace('|', '', $field[$field_course]);
+                        $price = esc_html('¥' . number_format($field[$field_price]));
+                        ?>
+                        <dt class="diving-products__name"><?php echo $course; ?></dt>
+                        <dd class="diving-products__price"><?php echo $price; ?></dd>
                       <?php endforeach; ?>
                     </dl>
                   </div>
