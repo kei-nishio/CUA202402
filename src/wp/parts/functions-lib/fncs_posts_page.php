@@ -11,9 +11,15 @@ function change_posts_per_page($query)
   if ($query->is_post_type_archive('campaign')) {
     $query->set('posts_per_page', 4);
   }
+  if ($query->is_tax('campaign_category')) {
+    $query->set('posts_per_page', 4);
+  }
 
   // カスタム投稿タイプ「voice」のアーカイブページでの表示件数を設定
   if ($query->is_post_type_archive('voice')) {
+    $query->set('posts_per_page', 6);
+  }
+  if ($query->is_tax('voice_category')) {
     $query->set('posts_per_page', 6);
   }
 }
