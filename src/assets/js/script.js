@@ -267,15 +267,16 @@ jQuery(function ($) {
     $(this).next().slideToggle(300);
   });
 
-  // ! 今回は利用しない
-
+  
   // * cf7フォームのバリデーション
-  // $(document).on("wpcf7invalid", function (event) {
-  //   $(".js-form-error").addClass("is-active");
-  //   window.scrollTo({
-  //     top: $(".js-form-error").offset().top - headerHeightDefault,
-  //   });
-  // });
+  $(document).on("wpcf7invalid", function (event) {
+    $(".js-form-error").addClass("is-active");
+    window.scrollTo({
+      top: $(".js-form-error").offset().top - headerHeightDefault,
+    });
+  });
+  
+  // ! 今回は利用しない
 
   // * ナビゲーションクリック時にスーッと移動する
   // const headerHeight = $(".js-header").height();
