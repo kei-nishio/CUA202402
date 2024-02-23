@@ -7,7 +7,7 @@
         <h2 class="loading__text-large">diving</h2>
         <p class="loading__text-small">into the ocean</p>
       </div>
-      <div class="loading__flex">
+      <div class="loading__flex js-loading-flex">
         <?php
         // カスタムフィールドの1つ目からローディング画像の取得
         $front_page_id = get_option('page_on_front');

@@ -30,7 +30,7 @@ jQuery(function ($) {
   // * ヘッダー高さ
   const headerHeightDefault = $("header").height();
 
-  // * URLにアンカーがある場合はローディング後にヘッダー高さ分を下げる
+  // * URLにアンカーがある場合は読込後にヘッダー高さ分を下げる
   $("a").on("click", function () {
     let targetHref = $(this).attr("href");
     if (targetHref && targetHref.startsWith("#")) {
@@ -55,15 +55,18 @@ jQuery(function ($) {
 
   // * ローディングアニメーション
   if (window.location.pathname === "/") {
-    const loadingTop = $(".js-load");
-    const loadingLeft = $(".js-loading-left");
-    const loadingRight = $(".js-loading-right");
     if (!sessionStorage.getItem("visited")) {
       // console.log("loading");
       $("body").css({ "overflow-y": "scroll", position: "fixed" });
-      loadingTop.show();
+      const loadingTop = $(".js-load");
+      const loadingFlex = $(".js-loading-flex");
+      const loadingLeft = $(".js-loading-left");
+      const loadingRight = $(".js-loading-right");
+
       loadingLeft.css({ top: "100%" });
       loadingRight.css({ top: "calc(100% + 80px)", right: "-20%" });
+      // ローディング画面前に背景を写さないようにするため
+      loadingFlex.css({ display: "flex" });
 
       const loadingStartTime = 1000;
       const imageAnimationTime = 1500;
@@ -91,7 +94,6 @@ jQuery(function ($) {
           loadingTop.fadeOut(loadingFadeOutTime);
           $("body").css({ "overflow-y": "", position: "" });
         });
-
       sessionStorage.setItem("visited", "true");
     }
   }

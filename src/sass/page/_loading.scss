@@ -1,7 +1,6 @@
 @use "global" as *;
 
 .loading {
-  display: none;
   position: fixed;
   top: 0;
   right: 0;
@@ -54,7 +53,7 @@
   }
 }
 .loading__flex {
-  display: flex;
+  display: none;
   justify-content: space-between;
   width: 100%;
   height: inherit;
