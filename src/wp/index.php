@@ -1,5 +1,1 @@
-<?php get_header(); ?>
-<main>
-  index
-</main>
-<?php get_footer(); ?>
+<?php get_template_part('/front-page');

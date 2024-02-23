@@ -53,7 +53,7 @@ jQuery(function ($) {
 
   // ! 個別動作
 
-  // * loading
+  // * ローディングアニメーション
   if (window.location.pathname === "/") {
     const loadingTop = $(".js-load");
     const loadingLeft = $(".js-loading-left");
@@ -267,7 +267,6 @@ jQuery(function ($) {
     $(this).next().slideToggle(300);
   });
 
-  
   // * cf7フォームのバリデーション
   $(document).on("wpcf7invalid", function (event) {
     $(".js-form-error").addClass("is-active");
@@ -275,7 +274,7 @@ jQuery(function ($) {
       top: $(".js-form-error").offset().top - headerHeightDefault,
     });
   });
-  
+
   // ! 今回は利用しない
 
   // * ナビゲーションクリック時にスーッと移動する

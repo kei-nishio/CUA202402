@@ -57,11 +57,12 @@
         <div class="main-view__swiper js-main-view-swiper">
           <div class="swiper">
             <ul class="swiper-wrapper">
+              <?php $front_page_id = get_option('page_on_front'); ?>
               <?php for ($i = 1; $i <= 4; $i++) : ?>
                 <?php
                 // カスタムフィールドから4つの画像を取得
-                $image_pc = get_field('acf_fv_image_pc_' . $i);
-                $image_sp = get_field('acf_fv_image_sp_' . $i);
+                $image_pc = get_field('acf_fv_image_pc_' . $i, $front_page_id);
+                $image_sp = get_field('acf_fv_image_sp_' . $i, $front_page_id);
                 $image_no_image = get_template_directory_uri() . '/assets/images/common/noimage.jpg';
                 if ($image_pc) :
                   $url_pc = esc_url($image_pc['url']);
