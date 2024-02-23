@@ -10,8 +10,9 @@
       <div class="loading__flex">
         <?php
         // カスタムフィールドの1つ目からローディング画像の取得
-        $image_pc = get_field('acf_fv_image_pc_1');
-        $image_sp = get_field('acf_fv_image_sp_1');
+        $front_page_id = get_option('page_on_front');
+        $image_pc = get_field('acf_fv_image_pc_1', $front_page_id);
+        $image_sp = get_field('acf_fv_image_sp_1', $front_page_id);
         $image_no_image = get_template_directory_uri() . '/assets/images/common/noimage.jpg';
         // PC画像がある場合はPC画像を、ない場合はnoimageを表示
         if ($image_pc) :
