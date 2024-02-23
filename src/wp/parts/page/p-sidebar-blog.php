@@ -8,43 +8,39 @@
       <h2 class="sidebar__title-text">人気記事</h2>
     </div>
     <?php
+    /**
+     * Popular Posts Widget 
+     * @link https://wordpress.org/plugins/wordpress-popular-posts/
+     * @link https://github.com/cabrerahector/wordpress-popular-posts/wiki/2.-Template-tags#content-tags
+     * @uses 引数名は上記の公式ドキュメントで有効かチェックしてください
+     * @deprecated <time></time>タグは反映されないのでdivタグで囲むこと。
+     */
     $args = array(
-      "post_type" => "post", //post通常投稿
-      "posts_per_page" => 3, //表示件数（-1で全件）
-      "orderby" => "comment_count", // data投稿日時、titeタイトル、modified最終更新日時、comment_countコメント数
-      "order" => "DESC", //ACS昇順、DESC降順
+      'range' => 'all', // 集計する期間。'daily', 'weekly', 'monthly', 'all'のいずれかを指定。
+      'order_by' => 'views', // 並び替えの基準。'views' (閲覧数) や 'comments' (コメント数) など。
+      'limit' => 3, // 表示する投稿の数。
+      'title_length' => 14, // タイトルを短縮する場合の文字数。
+      'thumbnail_width' => 120, // サムネイル画像の幅。
+      'thumbnail_height' => 90, // サムネイル画像の高さ。
+      'stats_date' => true, // 投稿日を表示するかどうか。表示する場合は、日付フォーマットを指定。
+      'stats_date_format' => 'Y.m/d', // 日付のフォーマット。
+      'wpp_start' => '<ul class="sidebar__popular-article-cards">', // 投稿リストの開始をマークするHTML。
+      'wpp_end' => '</ul>', // 投稿リストの終了をマークするHTML。
+      'post_html' => '
+      <li class="sidebar__popular-article-card card-article">
+        <a href="{url}" class="card-article__link">
+          <figure class="card-article__image">
+            <img src="{thumb_url}" alt="人気記事のアイキャッチ画像">
+          </figure>
+          <div class="card-article__text">
+            <div class="card-article__date">{date}</div>
+            <h3 class="card-article__title">{text_title}</h3>
+          </div>
+        </a>
+      </li>', // 各投稿を表示する際のHTML構造。
     );
-    $the_query = new WP_Query($args);
+    wpp_get_mostpopular($args);
     ?>
-    <ul class="sidebar__popular-article-cards">
-      <?php if ($the_query->have_posts()) : ?>
-        <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-          <?php
-          $post_id = get_the_ID(); // 投稿の ID を指定
-          $thumbnail_id = get_post_thumbnail_id($post_id); // アイキャッチ画像の ID を取得
-          $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
-          ?>
-          <li class="sidebar__popular-article-card card-article">
-            <a href="<?php the_permalink(); ?>" class="card-article__link">
-              <figure class="card-article__image">
-                <?php if (has_post_thumbnail()) : ?>
-                  <img src="<?php the_post_thumbnail_url("full"); ?>" alt="<?php echo esc_attr($alt); ?>">
-                <?php else : ?>
-                  <img src="<?php echo esc_url(get_theme_file_uri("/assets/images/common/noimage.jpg")); ?>" alt="ノーイメージ画像" />
-                <?php endif; ?>
-              </figure>
-              <div class="card-article__text">
-                <time class="card-article__date" datetime="<?php the_time("c"); ?>"><?php the_time("Y.m/d"); ?></time>
-                <h3 class="card-article__title"><?php echo esc_html(mb_strimwidth(get_the_title(), 0, 7 * 2 + 3, '...')); ?></h3>
-              </div>
-            </a>
-          </li>
-        <?php endwhile; ?>
-        <?php wp_reset_postdata(); ?>
-      <?php else : ?>
-        <li>記事が投稿されていません</li>
-      <?php endif; ?>
-    </ul>
   </section>
 
   <!-- 口コミ -->
