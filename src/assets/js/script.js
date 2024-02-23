@@ -63,6 +63,7 @@ jQuery(function ($) {
       const loadingLeft = $(".js-loading-left");
       const loadingRight = $(".js-loading-right");
 
+      loadingTop.css({ display: "block" });
       loadingLeft.css({ top: "100%" });
       loadingRight.css({ top: "calc(100% + 80px)", right: "-20%" });
       // ローディング画面前に背景を写さないようにするため
