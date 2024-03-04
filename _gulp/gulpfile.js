@@ -1,5 +1,5 @@
 const { src, dest, watch, series, parallel } = require("gulp"); // Gulpの基本関数をインポート
-const os = require('os'); //osモジュールを読み込む
+const os = require("os"); //osモジュールを読み込む
 const sass = require("gulp-sass")(require("sass")); // SCSSをCSSにコンパイルするためのモジュール
 const plumber = require("gulp-plumber"); // エラーが発生してもタスクを続行するためのモジュール
 const notify = require("gulp-notify"); // エラーやタスク完了の通知を表示するためのモジュール
@@ -60,7 +60,7 @@ const destWpPath = {
 
 // WordPressLocal反映用
 const destWpLocalPath = {
-  all: `${wpDirectory}/**/*`,
+  all: `${wpDirectory}/`,
   css: `${wpDirectory}/assets/css/`,
   js: `${wpDirectory}/assets/js/`,
   img: `${wpDirectory}/assets/images/`,
