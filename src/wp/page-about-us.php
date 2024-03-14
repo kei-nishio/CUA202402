@@ -40,20 +40,20 @@
 
   <!-- Gallery -->
   <?php
-  $post_id = 'gallery-options';
+  $field_slug = 'gallery-options';
   $field_group = 'scf_gallery_image_group';
   $field_item = 'scfgalleryimage';
-  $fields = SCF::get_option_meta($post_id, $field_group);
+  $fields = SCF::get_option_meta($field_slug, $field_group);
   ?>
   <?php
   // フィールド値が全て空の場合はギャラリーセクションを表示しない
   $result_not_empty = false;
   foreach ($fields as $field) :
     if ($field[$field_item] === "") :
-      // 画像の登録がない場合は、次のループに移る
+      // フィールドの登録がない場合は、次のループに移る
       continue;
     else :
-      // 画像の登録がある場合は、フラグを立てる
+      // フィールドの登録がある場合は、フラグを立てる
       $result_not_empty = true;
     endif;
   endforeach;
