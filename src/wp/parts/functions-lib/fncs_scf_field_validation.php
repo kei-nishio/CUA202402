@@ -3,9 +3,9 @@
 function check_fields_not_empty($post_id, $repeater_field_name)
 {
   $repeater_data = SCF::get($repeater_field_name, $post_id);
-  // リピーターフィールドのデータが取得できない場合は何もしない
+  // リピーターフィールドのデータが取得できない場合は、falseを返す
   if (empty($repeater_data)) {
-    return;
+    return false;
   }
   // 空のフィールドがあれば、falseを返す
   foreach ($repeater_data as $fields) {
