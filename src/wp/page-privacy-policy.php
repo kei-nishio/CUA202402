@@ -22,10 +22,14 @@
   <!-- site map -->
   <div class="page-privacy-policy page-top treatment">
     <div class="page-privacy-policy__inner inner">
-      <h2 class="page-privacy-policy__title"><?php the_title(); ?></h2>
-      <div class="page-privacy-policy__body">
-        <?php the_content(); ?>
-      </div>
+      <?php if (have_posts()) : ?>
+        <?php while (have_posts()) : the_post(); ?>
+          <h2 class="page-privacy-policy__title"><?php the_title(); ?></h2>
+          <div class="page-privacy-policy__body">
+            <?php the_content(); ?>
+          </div>
+        <?php endwhile; ?>
+      <?php endif; ?>
     </div>
   </div>
 

@@ -26,10 +26,14 @@
   <!-- site map -->
   <div class="page-terms-of-service page-top treatment">
     <div class="page-terms-of-service__inner inner">
-      <h2 class="page-terms-of-service__title"><?php the_title(); ?></h2>
-      <div class="page-terms-of-service__body">
-        <?php the_content(); ?>
-      </div>
+      <?php if (have_posts()) : ?>
+        <?php while (have_posts()) : the_post(); ?>
+          <h2 class="page-terms-of-service__title"><?php the_title(); ?></h2>
+          <div class="page-terms-of-service__body">
+            <?php the_content(); ?>
+          </div>
+        <?php endwhile; ?>
+      <?php endif; ?>
     </div>
   </div>
   </div>
