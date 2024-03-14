@@ -26,18 +26,24 @@
       <div class="page-voice__categories categories">
         <ul class="categories__items">
           <?php
+          $class1 = 'categories__item';
+          $class2 = 'categories__link';
           // カスタム投稿一覧ページのリンク
-          $home_class = (is_post_type_archive('voice')) ? 'is-active' : '';
-          $home_link = sprintf(
-            '<li class="categories__item %s"><a href="%s" class="categories__link" title="%s">%s</a></li>',
-            $home_class,
-            esc_url(home_url('/voice')),
-            esc_attr(__('View all posts', 'textdomain')),
-            esc_html('ALL')
-          );
-          echo sprintf(esc_html__('%s', 'textdomain'), $home_link);
+          $custom_post_type = 'voice'; // カスタム投稿タイプ名
+          if (is_post_type_archive($custom_post_type)) :
+            $add_class1 = $class1 . ' is-active';
+            $add_tag = '<div class="' . $class2 . '">ALL</div>';
+          else :
+            $add_class1 = $class1;
+            $add_link = esc_url(home_url('/' . $custom_post_type));
+            $add_tag = '<a href="' . $add_link . '" class="' . $class2 . '" title="View all posts">ALL</a>';
+          endif;
+          $home_link = '<li class="' . $add_class1 . '">' . $add_tag . '</li>';
+          echo $home_link;
+          ?>
+          <?php
           // タクソノミーのリンク
-          $taxonomy = 'voice_category';
+          $taxonomy = 'voice_category'; // タクソノミー名
           $current_term_id = get_queried_object_id();
           $terms = get_terms(array(
             'taxonomy' => $taxonomy,
@@ -47,16 +53,18 @@
           ));
           if ($terms) :
             foreach ($terms as $term) :
-              $term_class = ($current_term_id === $term->term_id) ? 'is-active' : '';
-              $term_link = sprintf(
-                '<li class="categories__item %s"><a href="%s" class="categories__link" title="%s">%s</a></li>',
-                $term_class,
-                // esc_url(get_category_link($term->term_id)), // カテゴリーページの場合
-                esc_url(get_term_link($term, $taxonomy)), //  タクソノミーページの場合
-                esc_attr(sprintf(__('View posts in %s', 'textdomain'), $term->name)),
-                esc_html($term->name)
-              );
-              echo sprintf(esc_html__('%s', 'textdomain'), $term_link);
+              $term_name = esc_html($term->name);
+              if ($current_term_id === $term->term_id) :
+                $add_class1 = $class1 . ' is-active';
+                $add_tag = '<div class="' . $class2 . '">' . $term_name . '</div>';
+              else :
+                $add_class1 = $class1;
+                // $add_link = esc_url(get_category_link($term->term_id)), // カテゴリーページの場合
+                $add_link = esc_url(get_term_link($term, $taxonomy)); // タクソノミーページの場合
+                $add_tag = '<a href="' . $add_link . '" class="' . $class2 . '" title="View posts in ' . $term_name . '">' . $term_name . '</a>';
+              endif;
+              $term_link = '<li class="' . $add_class1 . '">' . $add_tag . '</li>';
+              echo $term_link;
             endforeach;
           endif;
           ?>
