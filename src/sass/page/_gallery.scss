@@ -10,6 +10,7 @@
 
 // 492+8+80+8+492=1080
 // 80/1080=7.407%
+// 492/1080=45.556%
 
 .gallery__items {
   display: grid;
@@ -18,7 +19,7 @@
   width: 100%;
   margin-top: rem(36);
   @include mq {
-    grid-template-columns: auto 7.407% auto;
+    grid-template-columns: 45.556% 7.407% auto;
     margin-top: rem(76);
   }
 

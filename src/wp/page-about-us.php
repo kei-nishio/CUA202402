@@ -39,47 +39,62 @@
   </div>
 
   <!-- Gallery -->
-  <section class="gallery page-gallery treatment">
-    <div class="gallery__inner inner">
-      <div class="gallery__title section-title">
-        <div class="section-title__en">gallery</div>
-        <h2 class="section-title__ja">フォト</h2>
-      </div>
+  <?php
+  $post_id = 'gallery-options';
+  $field_group = 'scf_gallery_image_group';
+  $field_item = 'scfgalleryimage';
+  $fields = SCF::get_option_meta($post_id, $field_group);
+  ?>
+  <?php
+  // フィールド値が全て空の場合はギャラリーセクションを表示しない
+  $result_not_empty = false;
+  foreach ($fields as $field) :
+    if ($field[$field_item] === "") :
+      // 画像の登録がない場合は、次のループに移る
+      continue;
+    else :
+      // 画像の登録がある場合は、フラグを立てる
+      $result_not_empty = true;
+    endif;
+  endforeach;
+  ?>
+  <?php if ($result_not_empty) : ?>
+    <section class="gallery page-gallery treatment">
+      <div class="gallery__inner inner">
+        <div class="gallery__title section-title">
+          <div class="section-title__en">gallery</div>
+          <h2 class="section-title__ja">フォト</h2>
+        </div>
 
-      <!-- photos -->
-      <ul class="gallery__items">
-        <?php
-        $post_id = 'gallery-options';
-        $field_group = 'scf_gallery_image_group';
-        $field_item = 'scfgalleryimage';
-        $fields = SCF::get_option_meta($post_id, $field_group);
-        ?>
-        <?php foreach ($fields as $field) : ?>
-          <?php
-          $img_id = $field[$field_item];
-          $image_url = wp_get_attachment_image_url($img_id, 'full');
-          $image_alt = get_post_meta($img_id, '_wp_attachment_image_alt', true);
-          ?>
-          <?php if (!empty($image_url)) : ?>
-            <li class="gallery__item">
-              <p class="gallery__photo js-modal-open">
-                <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>">
-              </p>
-            </li>
-          <?php endif; ?>
-        <?php endforeach; ?>
-      </ul>
+        <!-- photos -->
+        <ul class="gallery__items">
+          <?php foreach ($fields as $field) : ?>
+            <?php
+            $img_id = $field[$field_item];
+            $image_url = wp_get_attachment_image_url($img_id, 'full');
+            $image_alt = get_post_meta($img_id, '_wp_attachment_image_alt', true);
+            ?>
+            <?php if (!empty($image_url)) : ?>
+              <li class="gallery__item">
+                <p class="gallery__photo js-modal-open">
+                  <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>">
+                </p>
+              </li>
+            <?php endif; ?>
+          <?php endforeach; ?>
+        </ul>
 
-      <!-- modal -->
-      <div class="gallery__modal modal js-modal js-modal-close">
-        <div class="modal__body">
-          <p class="modal__photo js-modal-imgBox">
-            <!-- <img class="modal__img js-modal-img" src="" alt="" /> -->
-          </p>
+        <!-- modal -->
+        <div class="gallery__modal modal js-modal js-modal-close">
+          <div class="modal__body">
+            <p class="modal__photo js-modal-imgBox">
+              <!-- <img class="modal__img js-modal-img" src="" alt="" /> -->
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  <?php endif ?>
 
   <!-- Contact -->
   <?php get_template_part('/parts/common/p-contact'); ?>
