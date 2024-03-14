@@ -323,7 +323,9 @@
       <ul class="voice__cards cards02 cards02--c2">
         <?php if ($the_query->have_posts()) : ?>
           <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
-            <?php get_template_part('/parts/card/p-card-voice') ?>
+            <li class="cards02__card">
+              <?php get_template_part('/parts/card/p-card-voice') ?>
+            </li>
           <?php endwhile; ?>
           <?php wp_reset_postdata(); ?>
         <?php else : ?>

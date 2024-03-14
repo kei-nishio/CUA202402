@@ -67,7 +67,9 @@
       <ul class="page-voice__cards cards02 cards02--c2">
         <?php if (have_posts()) : ?>
           <?php while (have_posts()) : the_post(); ?>
-            <?php get_template_part('/parts/card/p-card-voice') ?>
+            <li class="cards02__card">
+              <?php get_template_part('/parts/card/p-card-voice') ?>
+            </li>
           <?php endwhile; ?>
         <?php else : ?>
           <li>記事が投稿されていません</li>
