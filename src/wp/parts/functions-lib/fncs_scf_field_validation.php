@@ -22,9 +22,9 @@ function check_fields_not_empty($post_id, $repeater_field_name)
 function check_fields_numeric($post_id, $repeater_field_name, $numeric_name)
 {
   $repeater_data = SCF::get($repeater_field_name, $post_id);
-  // リピーターフィールドのデータが取得できない場合は何もしない
+  // リピーターフィールドのデータが取得できない場合は、falseを返す
   if (empty($repeater_data)) {
-    return;
+    return false;
   }
   // 数値でないフィールドがあれば、falseを返す
   foreach ($repeater_data as $fields) {
