@@ -26,7 +26,6 @@
   $field_question = 'scfquestion';
   $field_answer = 'scfanswer';
   $fields = SCF::get_option_meta($field_slug, $field_group);
-  var_dump($fields);
   ?>
   <?php
   // フィールド値が全て空の場合はギャラリーセクションを表示しない
