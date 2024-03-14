@@ -1,8 +1,14 @@
+<!-- Contact -->
+<?php if (!(is_404() || is_page('contact') || is_page('contact-thanks'))) : ?>
+  <?php get_template_part('/parts/common/p-contact'); ?>
+<?php endif ?>
+
+</main>
 <!-- Footer -->
 <?php
 if (is_404()) :
   $class = 'footer footer--404';
-elseif (is_page('contact-thank')) :
+elseif (is_page('contact-thanks')) :
   $class = 'footer footer--contact-thank';
 else :
   $class = 'footer';

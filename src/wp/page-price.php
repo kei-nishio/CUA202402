@@ -81,8 +81,4 @@
     </div>
   </div>
 
-  <!-- Contact -->
-  <?php get_template_part('/parts/common/p-contact'); ?>
-</main>
-
-<?php get_footer(); ?>
+  <?php get_footer(); ?>
