@@ -184,8 +184,11 @@
                     ?>
                     <?php
                     // カスタムフィールドの金額を取得
-                    $price_before = number_format(get_field('acf_parice_before'));
-                    $price_after = number_format(get_field('acf_parice_after'));
+                    $price_before = get_field('acf_parice_before');
+                    if ($price_before !== "") {
+                      $price_before = esc_html('¥' . number_format(get_field('acf_parice_before')));
+                    }
+                    $price_after = esc_html('¥' . number_format(get_field('acf_parice_after')));
                     ?>
                     <li class="sidebar__campaign-card">
                       <div class="card-campaign card-campaign--sidebar">
@@ -203,8 +206,8 @@
                           <div class="card-campaign__content">
                             <p class="card-campaign__text">全部コミコミ&#040;お一人様&#041;</p>
                             <div class="card-campaign__prices">
-                              <span class="card-campaign__price-before"><?php echo esc_html('¥' . $price_before); ?></span>
-                              <span class="card-campaign__price-after"><?php echo esc_html('¥' . $price_after); ?></span>
+                              <span class="card-campaign__price-before"><?php echo $price_before; ?></span>
+                              <span class="card-campaign__price-after"><?php echo $price_after; ?></span>
                             </div>
                           </div>
                         </div>

@@ -73,6 +73,28 @@
             $alt = get_post_meta($thumbnail_id, '_wp_attachment_image_alt', true); // アイキャッチ画像の alt 属性を取得
             ?>
             <li class="cards02__card">
+              <?php
+              // カスタムフィールドの金額を取得
+              $price_before = get_field('acf_parice_before');
+              if ($price_before !== "") {
+                $price_before = esc_html('¥' . number_format(get_field('acf_parice_before')));
+              }
+              $price_after = esc_html('¥' . number_format(get_field('acf_parice_after')));
+              // カスタムフィールドのメッセージと日時を取得
+              $campaign_message = get_field('acf_campaign_message');
+              $campaign_date_from = get_field('acf_date_from');
+              $campaign_date_to = get_field('acf_date_to');
+              // カスタムフィールド値の整形
+              $standardDateFrom = date("c", strtotime($campaign_date_from));
+              $standardDateTo = date("c", strtotime($campaign_date_to));
+              $formattedDateFrom = date("Y/n/j", strtotime($campaign_date_from));
+              $formattedDateTo = date("n/j", strtotime($campaign_date_to));
+              ?>
+              <?php
+              // タクソノミーを表示
+              $taxonomy = 'campaign_category';
+              $terms = get_the_terms($post_id, $taxonomy);
+              ?>
               <div class="card-campaign card-campaign--large">
                 <div class="card-campaign__body">
                   <figure class="card-campaign__image">
@@ -83,36 +105,16 @@
                     <?php endif; ?>
                   </figure>
                   <div class="card-campaign__meta">
-                    <?php
-                    // タクソノミーを表示
-                    $taxonomy = 'campaign';
-                    $terms = get_the_terms($post_id, $taxonomy);
-                    if (!is_wp_error($terms) && !empty($terms)) :
-                    ?>
-                      <span class="card-campaign__category category-diving">
-                        <?php echo esc_html($terms[0]->name); ?>
-                      </span>
+                    <?php if (!is_wp_error($terms) && !empty($terms)) : ?>
+                      <span class="card-campaign__category category-diving"><?php echo esc_html($terms[0]->name); ?></span>
                     <?php endif; ?>
                     <h3 class="card-campaign__title"><?php the_title(); ?></h3>
                   </div>
                   <div class="card-campaign__content">
                     <p class="card-campaign__text">全部コミコミ&#040;お一人様&#041;</p>
                     <div class="card-campaign__prices">
-                      <?php
-                      // カスタムフィールドを取得
-                      $price_before = number_format(get_field('acf_parice_before'));
-                      $price_after = number_format(get_field('acf_parice_after'));
-                      $campaign_message = get_field('acf_campaign_message');
-                      $campaign_date_from = get_field('acf_date_from');
-                      $campaign_date_to = get_field('acf_date_to');
-                      // カスタムフィールド値の整形
-                      $standardDateFrom = date("c", strtotime($campaign_date_from));
-                      $standardDateTo = date("c", strtotime($campaign_date_to));
-                      $formattedDateFrom = date("Y/n/j", strtotime($campaign_date_from));
-                      $formattedDateTo = date("n/j", strtotime($campaign_date_to));
-                      ?>
-                      <span class="card-campaign__price-before"><?php echo esc_html('¥' . $price_before); ?></span>
-                      <span class="card-campaign__price-after"><?php echo esc_html('¥' . $price_after); ?></span>
+                      <span class="card-campaign__price-before"><?php echo $price_before; ?></span>
+                      <span class="card-campaign__price-after"><?php echo $price_after; ?></span>
                     </div>
                     <p class="card-campaign__main-text u-desktop">
                       <?php echo esc_html($campaign_message); ?>
