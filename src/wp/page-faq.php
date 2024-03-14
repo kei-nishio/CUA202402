@@ -19,29 +19,47 @@
   <!-- Breadcrumb -->
   <?php get_template_part('/parts/common/p-breadcrumb'); ?>
 
-  <!-- Price -->
+  <!-- Faq -->
+  <?php
+  $field_slug = 'faq-options';
+  $field_group = 'scf_faq_group';
+  $field_question = 'scfquestion';
+  $field_answer = 'scfanswer';
+  $fields = SCF::get_option_meta($field_slug, $field_group);
+  var_dump($fields);
+  ?>
+  <?php
+  // フィールド値が全て空の場合はギャラリーセクションを表示しない
+  $result_not_empty = false;
+  foreach ($fields as $field) :
+    if ($field[$field_question] === "") :
+      // フィールドの登録がない場合は、次のループに移る
+      continue;
+    else :
+      // フィールドの登録がある場合は、フラグを立てる
+      $result_not_empty = true;
+    endif;
+  endforeach;
+  ?>
   <div class="page-faq page-top treatment">
     <div class="page-faq__inner inner">
       <!-- Accordion -->
-      <ul class="page-faq__items">
-        <?php
-        $post_id = 'faq-options';
-        $field_group = 'scf_faq_group';
-        $field_question = 'scfquestion';
-        $field_answer = 'scfanswer';
-        $fields = SCF::get_option_meta($post_id, $field_group);
-        ?>
-        <?php foreach ($fields as $field) : ?>
-          <?php if (!empty($field[$field_question]) && !empty($field[$field_answer])) : ?>
-            <li class="page-faq__item">
-              <dl class="page-faq__qa">
-                <dt class="page-faq__question js-faq-accordion"><?php echo $field[$field_question]; ?></dt>
-                <dd class="page-faq__answer"><?php echo $field[$field_answer]; ?></dd>
-              </dl>
-            </li>
-          <?php endif; ?>
-        <?php endforeach;  ?>
-      </ul>
+      <?php if ($result_not_empty) : ?>
+        <ul class="page-faq__items">
+          <?php foreach ($fields as $field) : ?>
+            <?php if (!empty($field[$field_question]) && !empty($field[$field_answer])) : ?>
+              <li class="page-faq__item">
+                <dl class="page-faq__qa">
+                  <dt class="page-faq__question js-faq-accordion"><?php echo $field[$field_question]; ?></dt>
+                  <dd class="page-faq__answer"><?php echo $field[$field_answer]; ?></dd>
+                </dl>
+              </li>
+            <?php endif; ?>
+          <?php endforeach;  ?>
+        </ul>
+      <?php else : ?>
+        <p>FAQ一覧がありません</p>
+      <?php endif ?>
     </div>
   </div>
 
