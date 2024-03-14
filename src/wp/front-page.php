@@ -400,7 +400,7 @@
             <?php endwhile; ?>
             <?php wp_reset_postdata(); ?>
           <?php else : ?>
-            <li>記事が投稿されていません</li>
+            <li>料金はお問合せフォームよりお問い合わせ願います。</li>
           <?php endif; ?>
         </ul>
         <figure class="price__image-pc u-desktop js-colorbox">
