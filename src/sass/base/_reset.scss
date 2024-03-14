@@ -118,3 +118,7 @@ a {
   color: inherit;
   transition: opacity 0.3s;
 }
+a:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
