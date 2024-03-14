@@ -28,7 +28,7 @@
         <div class="form__error js-form-error">
           <div>※必須項目が入力されていません。<span class="u-mobile"><br />&emsp;</span>入力してください。</div>
         </div>
-        <?php the_content(); ?>
+        <?php echo do_shortcode('[contact-form-7 id="eb00c44" title="入力画面"]'); ?>
       </div>
     </div>
   </div>
