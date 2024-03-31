@@ -45,3 +45,6 @@ get_template_part('/parts/functions-lib/fncs_custom_pagination');
 
 // ! カスタムメニューを追加する
 // get_template_part('/parts/functions-lib/fncs_add_menu');
+
+// ! 固定ページのブロックエディタを無効化する
+get_template_part('/parts/functions-lib/fncs_page_editor');

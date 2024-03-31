@@ -139,9 +139,19 @@
                   <?php $i = 0 ?>
                   <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
                     <?php
-                    // カスタムフィールドの値を取得
-                    $age_gender = esc_html(get_field('acf_age_gender'));
-                    $image = get_field('acf_customer_image');
+                    // カスタムフィールドグループの値を取得
+                    $customer_details = get_field('acf_customer_group');
+                    if ($customer_details) {
+                      // 'acf_age_gender_group' から 'acf_age' と 'acf_gender' の値を取得
+                      $age_gender = $customer_details['acf_age_gender_group'];
+                      if ($age_gender) {
+                        $age = esc_html($age_gender['acf_age']);
+                        $gender = esc_html($age_gender['acf_gender']);
+                      }
+                      // 'acf_customer_group' から直接取得できるフィールドの値を取得
+                      $image = $customer_details['acf_customer_image'];
+                      $customer_voice = esc_html($customer_details['acf_customer_voice']);
+                    }
                     // 画像URLの取得
                     $image_url = esc_url($image['url']);
                     $image_alt = esc_attr($image['alt']);
@@ -150,7 +160,7 @@
                       <figure class="card-review__image">
                         <img src="<?php echo $image_url ?>" alt="<?php echo $image_url ?>" />
                       </figure>
-                      <div class="card-review__tag"><?php echo $age_gender; ?></div>
+                      <div class="card-review__tag"><?php echo $age; ?>代(<?php echo $gender; ?>)</div>
                       <h3 class="card-review__title"><?php the_title(); ?></h3>
                     </li>
                   <?php endwhile; ?>
